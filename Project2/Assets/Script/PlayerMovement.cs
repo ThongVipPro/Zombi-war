@@ -54,10 +54,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isWalking)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    anim.SetTrigger("Attack");
-                }
                 isWalking = false;
                 anim.SetBool("IsMoving", isWalking);
                 StopMoving();
