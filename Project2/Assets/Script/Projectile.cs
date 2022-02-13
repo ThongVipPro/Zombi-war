@@ -7,25 +7,35 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed;
     private float direction;
     private bool hit;
-
+    private Timer destroyTimer;
     private BoxCollider2D boxCollider2D;
-
 
     private void Awake()
     {
         boxCollider2D = GetComponent<BoxCollider2D>();
+        destroyTimer = gameObject.AddComponent<Timer>();
+        destroyTimer.Duration = 3;
+        destroyTimer.Run();
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        if (hit) return;
-        float movementSpeed = speed * Time.deltaTime *direction;
-        transform.Translate(movementSpeed, 0, 0);
+        if (!destroyTimer.Finished)
+        {
+            if (hit) return;
+            float movementSpeed = speed * Time.deltaTime * direction;
+            transform.Translate(movementSpeed, 0, 0);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
         boxCollider2D.enabled = false;
@@ -47,6 +57,6 @@ public class Projectile : MonoBehaviour
     private void Deactive()
     {
         gameObject.SetActive(false);
-    }
+    }*/
 
 }
