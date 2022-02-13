@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
         boxCollider2D.enabled = false;
@@ -57,6 +57,6 @@ public class Projectile : MonoBehaviour
     private void Deactive()
     {
         gameObject.SetActive(false);
-    }
+    }*/
 
 }
