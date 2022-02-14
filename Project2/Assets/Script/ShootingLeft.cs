@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ShootingLeft : MonoBehaviour
 {
-    public Transform firePoint;
-    public GameObject bulletPrefab;
+    [SerializeField] Transform firePoint;
+    [SerializeField] GameObject bulletPrefab;
 
-    public float bulletForce = 5f;
+    [SerializeField] float bulletForce = 5f;
 
     private float nextShootTimer;
 
