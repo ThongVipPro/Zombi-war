@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ShootingUp : MonoBehaviour
 {
-    public Transform firePoint;
-    public GameObject bulletPrefab;
+    [SerializeField] Transform firePoint;
+    [SerializeField] GameObject bulletPrefab;
 
-    public float bulletForce = 5f;
+    [SerializeField] float bulletForce = 5f;
 
     private float nextShootTimer;
 
-    
+
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class ShootingUp : MonoBehaviour
     }*/
 
     void Shoot()
-    {       
+    {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce((firePoint.up) * bulletForce, ForceMode2D.Impulse);
