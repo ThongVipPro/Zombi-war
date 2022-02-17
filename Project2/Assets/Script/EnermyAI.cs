@@ -53,6 +53,10 @@ public class EnermyAI : MonoBehaviour
             xxx.x = 20;
         }
         transform.localScale = xxx;
+        if (isInAttackRange)
+        {
+            anim.SetBool("isRunning", false);
+        }
     }
     private void FixedUpdate()
     {
@@ -62,6 +66,7 @@ public class EnermyAI : MonoBehaviour
         }
         if (isInAttackRange)
         {
+            
             rb.velocity = Vector2.zero;
         }
     }
