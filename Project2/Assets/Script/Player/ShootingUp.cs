@@ -11,8 +11,6 @@ public class ShootingUp : MonoBehaviour
 
     private float nextShootTimer;
 
-
-
     void Start()
     {
 
@@ -21,7 +19,6 @@ public class ShootingUp : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (Time.time > nextShootTimer)
         {
             bulletPrefab.transform.localRotation = Quaternion.Euler(0, 0, 90);
@@ -29,14 +26,11 @@ public class ShootingUp : MonoBehaviour
             float fireRate = .2f;
             nextShootTimer = Time.time + fireRate;
         }
-
-
     }
-    /*private void FixedUpdate()
-    {
-        
-    }*/
 
+    /// <summary>
+    /// Instantiates the projectile in the determined direction
+    /// </summary>
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
