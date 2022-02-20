@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: b5cacbfddda78f14cb63932b5f98c969
+guid: 8eb4ac8c7f8892f4288b65813f0198f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1004790245323072901
-    second: way4_0
+      213: 7033040027287476528
+    second: way7_0
   - first:
-      213: -5349444182031467156
-    second: way4_4
+      213: 1568112508310828185
+    second: way7_1
   - first:
-      213: -6362536450231826972
-    second: way4_8
+      213: 8341208413612381501
+    second: way7_2
   - first:
-      213: -4421662479948016419
-    second: way4_12
+      213: -3174309266286348766
+    second: way7_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,49 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: way4_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 585624e876bb1fd00800000000000000
-      internalID: 1004790245323072901
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: way4_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6dfb38ebd4f2c5b0800000000000000
-      internalID: -5349444182031467156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: way4_8
+      name: way7_0
       rect:
         serializedVersion: 2
         x: 0
@@ -159,14 +117,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e505750fcab3b7a0800000000000000
-      internalID: -6362536450231826972
+      spriteID: 039d29564a06a9160800000000000000
+      internalID: 7033040027287476528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: way4_12
+      name: way7_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 994b6b1a40e03c510800000000000000
+      internalID: 1568112508310828185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: way7_2
       rect:
         serializedVersion: 2
         x: 0
@@ -180,8 +159,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd49606c66913a2c0800000000000000
-      internalID: -4421662479948016419
+      spriteID: d359ddacbdce1c370800000000000000
+      internalID: 8341208413612381501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: way7_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22675cf5a8692f3d0800000000000000
+      internalID: -3174309266286348766
       vertices: []
       indices: 
       edges: []

@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: b5cacbfddda78f14cb63932b5f98c969
+guid: 364b97873b800814896a0ab2f96cbac8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1004790245323072901
-    second: way4_0
-  - first:
-      213: -5349444182031467156
-    second: way4_4
-  - first:
-      213: -6362536450231826972
-    second: way4_8
-  - first:
-      213: -4421662479948016419
-    second: way4_12
+      213: 3036710491692406011
+    second: corner1_12
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,70 +94,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: way4_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 585624e876bb1fd00800000000000000
-      internalID: 1004790245323072901
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: way4_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6dfb38ebd4f2c5b0800000000000000
-      internalID: -5349444182031467156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: way4_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e505750fcab3b7a0800000000000000
-      internalID: -6362536450231826972
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: way4_12
+      name: corner1_12
       rect:
         serializedVersion: 2
         x: 0
@@ -180,8 +108,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd49606c66913a2c0800000000000000
-      internalID: -4421662479948016419
+      spriteID: bf4170f5a10942a20800000000000000
+      internalID: 3036710491692406011
       vertices: []
       indices: 
       edges: []
