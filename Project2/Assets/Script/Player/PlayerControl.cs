@@ -1,26 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] float moveSpeed = 5f;
-
     Rigidbody2D rb;
+    
     [SerializeField] Animator walkAnim;
     [SerializeField] Animator shootAnim;
 
+    [SerializeField] float moveSpeed = 5f;
     float x, y;
-    private bool isWalking;
+    bool isWalking;
+    Vector3 moveDir;
 
-    private Vector3 moveDir;
+    HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
 
     /*public GameObject arrowPrefab1;*/
 
+    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        EventManager.AddInvoker(this);
     }
 
     // Update is called once per frame
@@ -33,11 +37,12 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("Attack");
         }*/
+
         if (x == 0 || y == 0)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Attack2();
+                Attack();
             }
         }
 
@@ -61,8 +66,8 @@ public class PlayerMovement : MonoBehaviour
                 StopMoving();
             }
         }
-        moveDir = new Vector3(x, y).normalized;
 
+        moveDir = new Vector3(x, y).normalized;
         Vector3 xxx = transform.localScale;
         if (Input.GetAxis("Horizontal") < 0)
         {
@@ -75,7 +80,11 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = xxx;
 
     }
-    void Attack2()
+
+    /// <summary>
+    /// Makes the player attack
+    /// </summary>
+    void Attack()
     {
         shootAnim.SetTrigger("Attack");
         //if (Input.GetAxis("Horizontal") < 0)
@@ -92,14 +101,39 @@ public class PlayerMovement : MonoBehaviour
         //GameObject gameObject = GameObject.Find("arrow");
         //gameObject.transform.position = arrowPoint.position;
         //gameObject.GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
-
     }
+
+    /// <summary>
+    /// Stops the player from moving
+    /// </summary>
     private void StopMoving()
     {
         rb.velocity = Vector3.zero;
     }
+
     void FixedUpdate()
     {
         rb.velocity = moveDir * moveSpeed * Time.deltaTime;
+    }
+
+    /// <summary>
+    /// Add a listener for when the player's health is reduced
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddHealthChangeEventListener(UnityAction<int> listener)
+    {
+        healthChangeEvent.AddListener(listener);
+    }
+
+    // This method is for testing purpose
+    int health = 100;
+    int damage = 10;
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        health -= damage;
+        if(collision.gameObject.tag == "Cut")
+        {
+            healthChangeEvent.Invoke(health);
+        }
     }
 }
