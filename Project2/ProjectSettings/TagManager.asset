@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - New tagCut
   - Cut
+  - UI
+  - Projectile
   layers:
   - Default
   - TransparentFX

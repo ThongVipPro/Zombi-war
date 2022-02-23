@@ -1,10 +1,11 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField]
+    private float speed;
     private float direction;
     private bool hit;
     private Timer destroyTimer;
@@ -18,13 +19,11 @@ public class Projectile : MonoBehaviour
         destroyTimer.Run();
     }
 
-
     // Update is called once per frame
     void Update()
     {
         if (!destroyTimer.Finished)
         {
-            if (hit) return;
             float movementSpeed = speed * Time.deltaTime * direction;
             transform.Translate(movementSpeed, 0, 0);
         }
@@ -32,7 +31,6 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     /*private void OnTriggerEnter2D(Collider2D collision)
@@ -59,4 +57,8 @@ public class Projectile : MonoBehaviour
         gameObject.SetActive(false);
     }*/
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+    }
 }
