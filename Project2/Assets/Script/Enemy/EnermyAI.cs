@@ -1,28 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class EnermyAI : MonoBehaviour
 {
-    public float speed;
-    public float checkRadius;
-    public float attackRadius;
+    [SerializeField]
+    float speed;
 
-    public bool shoudlRotate;
+    [SerializeField]
+    float checkRadius;
 
-    public LayerMask whatIsPlayer;
+    [SerializeField]
+    float attackRadius;
 
-    private Transform target;
-    private Rigidbody2D rb;
-    private Animator anim;
-    private Vector2 movement;
-    public Vector3 dir;
+    [SerializeField]
+    bool shouldRotate;
+
+    [SerializeField]
+    LayerMask whatIsPlayer;
+
+    SpriteRenderer spriteRenderer;
+    Transform target;
+    Rigidbody2D rb;
+    Animator anim;
+    Vector2 movement;
+    Vector3 dir;
 
     private bool isInChaseRange;
     private bool isInAttackRange;
 
+    [SerializeField]
+    HealthBar healthBar;
+
+    //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
+
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").transform;
@@ -38,40 +53,71 @@ public class EnermyAI : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         dir.Normalize();
         movement = dir;
-        if (shoudlRotate)
+        if (shouldRotate)
         {
             anim.SetFloat("X", dir.x);
             anim.SetFloat("Y", dir.y);
         }
-        Vector3 xxx = transform.localScale;
+
+        // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
+        //Vector3 xxx = transform.localScale;
         if ((target.position.x - transform.position.x) < 0)
         {
-            xxx.x = -20;
+            spriteRenderer.flipX = true;
         }
         if ((target.position.x - transform.position.x) > 0)
         {
-            xxx.x = 20;
+            spriteRenderer.flipX = false;
         }
-        transform.localScale = xxx;
         if (isInAttackRange)
         {
             anim.SetBool("isRunning", false);
         }
     }
+
     private void FixedUpdate()
     {
-        if(isInChaseRange && !isInAttackRange)
+        if (isInChaseRange && !isInAttackRange)
         {
             MoveCharacter(movement);
         }
         if (isInAttackRange)
         {
-            
             rb.velocity = Vector2.zero;
         }
     }
+
     private void MoveCharacter(Vector2 dir)
     {
         rb.MovePosition((Vector2)transform.position + (dir * speed * Time.deltaTime));
+    }
+
+    //public void AddHealthChangeEventListener(UnityAction<int> listener)
+    //{
+    //    healthChangeEvent.AddListener(listener);
+    //}
+
+    // This method is for testing purpose
+    int health = 100;
+    int damage = 10;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        health -= damage;
+        if (collision.gameObject.tag == "Projectile")
+        {
+            healthBar.SetHealth(health);
+        }
+        if (health <= 0)
+        {
+            anim.SetBool("isDead", true);
+            StartCoroutine(Dead());
+        }
+    }
+
+    IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(0.5f);
+        this.gameObject.SetActive(false);
     }
 }
