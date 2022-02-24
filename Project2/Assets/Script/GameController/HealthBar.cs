@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] Slider slider;
+    [SerializeField]
+    Slider slider;
 
     // Start is called before the first frame update
     private void Start()
     {
-        EventManager.AddListener(SetHealth);
-    }
+        //EventManager.AddPlayerHitEventListener(SetHealth);
+    }   
 
     /// <summary>
     /// Changes the health value of the bar

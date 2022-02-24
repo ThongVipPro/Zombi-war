@@ -1,21 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class PlayerControl : MonoBehaviour
 {
     Rigidbody2D rb;
-    
-    [SerializeField] Animator walkAnim;
-    [SerializeField] Animator shootAnim;
 
-    [SerializeField] float moveSpeed = 5f;
-    float x, y;
+    SpriteRenderer spriteRenderer;
+    Animator anim;
+
+    [SerializeField]
+    float moveSpeed = 5f;
+    float x,
+        y;
     bool isWalking;
     Vector3 moveDir;
 
-    HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
+    [SerializeField]
+    HealthBar healthBar;
+
+    //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
 
     /*public GameObject arrowPrefab1;*/
 
@@ -23,8 +28,9 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        EventManager.AddInvoker(this);
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        EventManager.AddPlayerHitEventInvoker(this);
     }
 
     // Update is called once per frame
@@ -48,13 +54,13 @@ public class PlayerControl : MonoBehaviour
 
         if (x != 0 || y != 0)
         {
-            walkAnim.SetFloat("X", x);
-            walkAnim.SetFloat("Y", y);
+            anim.SetFloat("X", x);
+            anim.SetFloat("Y", y);
 
             if (!isWalking)
             {
                 isWalking = true;
-                walkAnim.SetBool("IsMoving", isWalking);
+                anim.SetBool("IsMoving", isWalking);
             }
         }
         else
@@ -62,23 +68,24 @@ public class PlayerControl : MonoBehaviour
             if (isWalking)
             {
                 isWalking = false;
-                walkAnim.SetBool("IsMoving", isWalking);
+                anim.SetBool("IsMoving", isWalking);
                 StopMoving();
             }
         }
 
         moveDir = new Vector3(x, y).normalized;
-        Vector3 xxx = transform.localScale;
+
+        // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
+        // Vector3 player = transform.localScale;
         if (Input.GetAxis("Horizontal") < 0)
         {
-            xxx.x = -20;
+            spriteRenderer.flipX = true;
         }
         if (Input.GetAxis("Horizontal") > 0)
         {
-            xxx.x = 20;
+            spriteRenderer.flipX = false;
         }
-        transform.localScale = xxx;
-
+        //transform.localScale = player;
     }
 
     /// <summary>
@@ -86,7 +93,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     void Attack()
     {
-        shootAnim.SetTrigger("Attack");
+        anim.SetTrigger("Attack");
         //if (Input.GetAxis("Horizontal") < 0)
         //{
         //    GameObject arrow = Instantiate(arrowPrefab1, transform.position, Quaternion.identity);
@@ -120,20 +127,33 @@ public class PlayerControl : MonoBehaviour
     /// Add a listener for when the player's health is reduced
     /// </summary>
     /// <param name="listener"></param>
-    public void AddHealthChangeEventListener(UnityAction<int> listener)
-    {
-        healthChangeEvent.AddListener(listener);
-    }
+    //public void AddHealthChangeEventListener(UnityAction<int> listener)
+    //{
+    //    healthChangeEvent.AddListener(listener);
+    //}
 
     // This method is for testing purpose
     int health = 100;
     int damage = 10;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         health -= damage;
-        if(collision.gameObject.tag == "Cut")
+        if (collision.gameObject.tag == "Cut")
         {
-            healthChangeEvent.Invoke(health);
+            //healthChangeEvent.Invoke(health);
+            healthBar.SetHealth(health);
         }
+        if (health <= 0)
+        {
+            anim.SetBool("isDead", true);
+            StartCoroutine(Dead());
+        }
+    }
+
+    IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(0.5f);
+        this.gameObject.SetActive(false);
     }
 }
