@@ -1,20 +1,21 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class ShootingUp : MonoBehaviour
 {
-    [SerializeField] Transform firePoint;
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField]
+    Transform firePoint;
 
-    [SerializeField] float bulletForce = 5f;
+    [SerializeField]
+    GameObject bulletPrefab;
+
+    [SerializeField]
+    float bulletForce = 5f;
 
     private float nextShootTimer;
 
-    void Start()
-    {
-
-    }
+    void Start() { }
 
     // Update is called once per frame
     void FixedUpdate()

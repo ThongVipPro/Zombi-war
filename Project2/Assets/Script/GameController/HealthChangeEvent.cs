@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
-public class HealthChangeEvent : UnityEvent<int>
-{
-}
+public class HealthChangeEvent : UnityEvent<int> { }
