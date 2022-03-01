@@ -13,6 +13,9 @@ public static class EventManager
     static EnermyAI enemyHitEventInvoker;
     static UnityAction<int> enemyHitEventListener;
 
+    static PlayerControl coinPickupEventInvoker;
+    static UnityAction<int> coinPickupEventListener;
+
     /// <summary>
     /// Adds the invoker for player hit event
     /// </summary>
@@ -62,6 +65,32 @@ public static class EventManager
         if (enemyHitEventInvoker != null)
         {
             //enemyHitEventInvoker.AddHealthChangeEventListener(enemyHitEventListener);
+        }
+    }
+
+    /// <summary>
+    /// Add the invoker for picking up coin
+    /// </summary>
+    /// <param name="script"></param>
+    public static void AddCoinPickupEventInvoker(PlayerControl script)
+    {
+        coinPickupEventInvoker = script;
+        if (coinPickupEventListener != null)
+        {
+            coinPickupEventInvoker.AddCoinPickupEventListener(coinPickupEventListener);
+        }
+    }
+
+    /// <summary>
+    /// Add the listener for picking up coin
+    /// </summary>
+    /// <param name="handler"></param>
+    public static void AddCoinPickupEventListener(UnityAction<int> handler)
+    {
+        coinPickupEventListener = handler;
+        if (coinPickupEventInvoker != null)
+        {
+            coinPickupEventInvoker.AddCoinPickupEventListener(coinPickupEventListener);
         }
     }
 }
