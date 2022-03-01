@@ -33,6 +33,8 @@ public class EnermyAI : MonoBehaviour
     [SerializeField]
     HealthBar healthBar;
 
+    [SerializeField]
+    GameObject CoinPrefab;
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
 
     private void Start()
@@ -118,6 +120,8 @@ public class EnermyAI : MonoBehaviour
     IEnumerator Dead()
     {
         yield return new WaitForSeconds(0.5f);
-        this.gameObject.SetActive(false);
+        // Instantiate a new coin prefab.
+        GameObject obj = Instantiate(CoinPrefab, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
