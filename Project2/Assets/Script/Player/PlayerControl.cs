@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     HealthBar healthBar;
 
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
+    CoinPickupEvent coinPickupEvent = new CoinPickupEvent();
 
     /*public GameObject arrowPrefab1;*/
 
@@ -31,6 +32,7 @@ public class PlayerControl : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         EventManager.AddPlayerHitEventInvoker(this);
+        EventManager.AddCoinPickupEventInvoker(this);
     }
 
     // Update is called once per frame
@@ -132,9 +134,20 @@ public class PlayerControl : MonoBehaviour
     //    healthChangeEvent.AddListener(listener);
     //}
 
+    /// <summary>
+    /// Add listener for picking up coin
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddCoinPickupEventListener(UnityAction<int> listener)
+    {
+        coinPickupEvent.AddListener(listener);
+    }
+
     // This method is for testing purpose
     int health = 100;
     int damage = 10;
+
+    int money = 0;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -148,6 +161,14 @@ public class PlayerControl : MonoBehaviour
         {
             anim.SetBool("isDead", true);
             StartCoroutine(Dead());
+        }
+
+        if(collision.gameObject.tag == "Money")
+        {
+            money++;
+            Destroy(collision.gameObject);
+            coinPickupEvent.Invoke(money);
+            Debug.Log(money);
         }
     }
 
