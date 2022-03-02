@@ -7,6 +7,8 @@ TagManager:
   - Cut
   - UI
   - Projectile
+  - Money
+  - MoneyCount
   layers:
   - Default
   - TransparentFX
