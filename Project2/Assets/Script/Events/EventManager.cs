@@ -13,6 +13,7 @@ public static class EventManager
     static EnermyAI enemyHitEventInvoker;
     static UnityAction<int> enemyHitEventListener;
 
+    // Event listener for coin pickup
     static PlayerControl coinPickupEventInvoker;
     static UnityAction<int> coinPickupEventListener;
 
