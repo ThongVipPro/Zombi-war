@@ -92,6 +92,7 @@ public class PlayerControl : MonoBehaviour
         }
         //transform.localScale = player;
 
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
@@ -101,6 +102,7 @@ public class PlayerControl : MonoBehaviour
     void Interact()
     {
         var isInteractable = Physics2D.OverlapCircle(transform.position, 2f, npc);
+
         if (isInteractable != null)
         {
             isInteractable.GetComponent<NPC>()?.Interact();
@@ -168,9 +170,9 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        health -= damage;
         if (collision.gameObject.tag == "Cut")
         {
+            health -= damage;
             //healthChangeEvent.Invoke(health);
             healthBar.SetHealth(health);
         }
