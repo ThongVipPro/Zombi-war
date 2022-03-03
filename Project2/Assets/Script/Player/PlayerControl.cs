@@ -7,6 +7,9 @@ public class PlayerControl : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    [SerializeField]
+    LayerMask npc;
+
     SpriteRenderer spriteRenderer;
     Animator anim;
 
@@ -35,8 +38,8 @@ public class PlayerControl : MonoBehaviour
         EventManager.AddCoinPickupEventInvoker(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Change this method's name so that it will be called in GameController.Update() instead.
+    public void HandleUpdate()
     {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
@@ -88,6 +91,22 @@ public class PlayerControl : MonoBehaviour
             spriteRenderer.flipX = false;
         }
         //transform.localScale = player;
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
+    }
+
+    void Interact()
+    {
+        var isInteractable = Physics2D.OverlapCircle(transform.position, 2f, npc);
+
+        if (isInteractable != null)
+        {
+            isInteractable.GetComponent<NPC>()?.Interact();
+        }
     }
 
     /// <summary>
@@ -151,9 +170,9 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        health -= damage;
         if (collision.gameObject.tag == "Cut")
         {
+            health -= damage;
             //healthChangeEvent.Invoke(health);
             healthBar.SetHealth(health);
         }
@@ -163,12 +182,11 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(Dead());
         }
 
-        if(collision.gameObject.tag == "Money")
+        if (collision.gameObject.tag == "Money")
         {
             money++;
             Destroy(collision.gameObject);
             coinPickupEvent.Invoke(money);
-            Debug.Log(money);
         }
     }
 
