@@ -36,6 +36,10 @@ public class PlayerControl : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         EventManager.AddPlayerHitEventInvoker(this);
         EventManager.AddCoinPickupEventInvoker(this);
+        DialogManager.Instance.OnHideDialog += () =>
+        {
+            ShopManager.Instance.OpenShop();
+        };
     }
 
     // Change this method's name so that it will be called in GameController.Update() instead.
@@ -105,6 +109,7 @@ public class PlayerControl : MonoBehaviour
 
         if (isInteractable != null)
         {
+            StopMoving();
             isInteractable.GetComponent<NPC>()?.Interact();
         }
     }
@@ -184,7 +189,7 @@ public class PlayerControl : MonoBehaviour
 
         if (collision.gameObject.tag == "Money")
         {
-            money++;
+            money += 30;
             Destroy(collision.gameObject);
             coinPickupEvent.Invoke(money);
         }

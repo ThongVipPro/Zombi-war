@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class CoinControl : MonoBehaviour
 {
     static Text MoneyCount;
-    static int amount;
+    public int amount;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +14,7 @@ public class CoinControl : MonoBehaviour
         MoneyCount = GameObject.FindGameObjectWithTag("MoneyCount").GetComponent<Text>();
         MoneyCount.text = amount.ToString();
         EventManager.AddCoinPickupEventListener(SetMoney);
+        EventManager.AddPurchaseEventListener(SetMoney);
     }
 
     // Update is called once per frame

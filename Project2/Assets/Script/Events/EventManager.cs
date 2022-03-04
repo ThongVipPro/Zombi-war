@@ -17,6 +17,10 @@ public static class EventManager
     static PlayerControl coinPickupEventInvoker;
     static UnityAction<int> coinPickupEventListener;
 
+    //Event listener for purchase
+    static ShopManager purchaseEventInvoker;
+    static UnityAction<int> purchaseEventListener;
+
     /// <summary>
     /// Adds the invoker for player hit event
     /// </summary>
@@ -92,6 +96,32 @@ public static class EventManager
         if (coinPickupEventInvoker != null)
         {
             coinPickupEventInvoker.AddCoinPickupEventListener(coinPickupEventListener);
+        }
+    }
+
+    /// <summary>
+    /// Add the invoker for purchase
+    /// </summary>
+    /// <param name="script"></param>
+    public static void AddPurchaseEventInvoker(ShopManager script)
+    {
+        purchaseEventInvoker = script;
+        if (purchaseEventListener != null)
+        {
+            purchaseEventInvoker.AddPurchaseEventListener(purchaseEventListener);
+        }
+    }
+
+    /// <summary>
+    /// Add the listener for purchase
+    /// </summary>
+    /// <param name="handler"></param>
+    public static void AddPurchaseEventListener(UnityAction<int> handler)
+    {
+        purchaseEventListener = handler;
+        if (purchaseEventInvoker != null)
+        {
+            purchaseEventInvoker.AddPurchaseEventListener(purchaseEventListener);
         }
     }
 }

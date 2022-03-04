@@ -35,6 +35,7 @@ public class EnermyAI : MonoBehaviour
 
     [SerializeField]
     GameObject CoinPrefab;
+
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
 
     private void Start()
@@ -105,9 +106,9 @@ public class EnermyAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        health -= damage;
         if (collision.gameObject.tag == "Projectile")
         {
+            health -= damage;
             healthBar.SetHealth(health);
         }
         if (health <= 0)
