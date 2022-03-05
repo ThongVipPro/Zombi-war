@@ -25,6 +25,7 @@ public class PlayerControl : MonoBehaviour
 
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
     CoinPickupEvent coinPickupEvent = new CoinPickupEvent();
+    PeopleSavedEvent peopleSavedEvent = new PeopleSavedEvent();
 
     /*public GameObject arrowPrefab1;*/
 
@@ -34,8 +35,8 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        EventManager.AddPlayerHitEventInvoker(this);
         EventManager.AddCoinPickupEventInvoker(this);
+        EventManager.AddPeopleSavedEventInvoker(this);
         DialogManager.Instance.OnHideDialog += () =>
         {
             ShopManager.Instance.OpenShop();
@@ -167,11 +168,21 @@ public class PlayerControl : MonoBehaviour
         coinPickupEvent.AddListener(listener);
     }
 
+    /// <summary>
+    /// Add listener for people saved
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddPeopleSavedEventListener(UnityAction<int> listener)
+    {
+        peopleSavedEvent.AddListener(listener);
+    }
+
     // This method is for testing purpose
     int health = 100;
     int damage = 10;
 
     int money = 0;
+    int people = 0;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -192,6 +203,12 @@ public class PlayerControl : MonoBehaviour
             money += 30;
             Destroy(collision.gameObject);
             coinPickupEvent.Invoke(money);
+        }
+        if (collision.gameObject.tag == "People")
+        {
+            people++;
+            Destroy(collision.gameObject);
+            peopleSavedEvent.Invoke(people);
         }
     }
 

@@ -5,73 +5,17 @@ using System.Collections.Generic;
 
 public static class EventManager
 {
-    // Event listener for player getting hit
-    static PlayerControl playerHitEventInvoker;
-    static UnityAction<int> playerHitEventListener;
-
-    // Event listener for enemy getting hit
-    static EnermyAI enemyHitEventInvoker;
-    static UnityAction<int> enemyHitEventListener;
-
     // Event listener for coin pickup
     static PlayerControl coinPickupEventInvoker;
     static UnityAction<int> coinPickupEventListener;
 
+    // Event listener for people saved
+    static PlayerControl peopleSavedEventInvoker;
+    static UnityAction<int> peopleSavedEventListener;
+
     //Event listener for purchase
     static ShopManager purchaseEventInvoker;
     static UnityAction<int> purchaseEventListener;
-
-    /// <summary>
-    /// Adds the invoker for player hit event
-    /// </summary>
-    /// <param name="script"></param>
-    public static void AddPlayerHitEventInvoker(PlayerControl script)
-    {
-        playerHitEventInvoker = script;
-        if (playerHitEventListener != null)
-        {
-            //playerHitEventInvoker.AddHealthChangeEventListener(playerHitEventListener);
-        }
-    }
-
-    /// <summary>
-    /// Adds the listener for player hit event
-    /// </summary>
-    /// <param name="handler"></param>
-    public static void AddPlayerHitEventListener(UnityAction<int> handler)
-    {
-        playerHitEventListener = handler;
-        if (playerHitEventInvoker != null)
-        {
-            //playerHitEventInvoker.AddHealthChangeEventListener(playerHitEventListener);
-        }
-    }
-
-    /// <summary>
-    /// Adds the invoker for enemy hit event
-    /// </summary>
-    /// <param name="script"></param>
-    public static void AddEnemyHitEventInvoker(EnermyAI script)
-    {
-        enemyHitEventInvoker = script;
-        if (enemyHitEventListener != null)
-        {
-            //enemyHitEventInvoker.AddHealthChangeEventListener(enemyHitEventListener);
-        }
-    }
-
-    /// <summary>
-    /// Adds the listener for enemy hit event
-    /// </summary>
-    /// <param name="handler"></param>
-    public static void AddEnemyHitEventListener(UnityAction<int> handler)
-    {
-        enemyHitEventListener = handler;
-        if (enemyHitEventInvoker != null)
-        {
-            //enemyHitEventInvoker.AddHealthChangeEventListener(enemyHitEventListener);
-        }
-    }
 
     /// <summary>
     /// Add the invoker for picking up coin
@@ -96,6 +40,32 @@ public static class EventManager
         if (coinPickupEventInvoker != null)
         {
             coinPickupEventInvoker.AddCoinPickupEventListener(coinPickupEventListener);
+        }
+    }
+
+    /// <summary>
+    /// Add the invoker for people saved
+    /// </summary>
+    /// <param name="script"></param>
+    public static void AddPeopleSavedEventInvoker(PlayerControl script)
+    {
+        peopleSavedEventInvoker = script;
+        if (peopleSavedEventListener != null)
+        {
+            peopleSavedEventInvoker.AddPeopleSavedEventListener(peopleSavedEventListener);
+        }
+    }
+
+    /// <summary>
+    /// Add the listener for picking up coin
+    /// </summary>
+    /// <param name="handler"></param>
+    public static void AddPeopleSavedEventListener(UnityAction<int> handler)
+    {
+        peopleSavedEventListener = handler;
+        if (peopleSavedEventInvoker != null)
+        {
+            peopleSavedEventInvoker.AddPeopleSavedEventListener(peopleSavedEventListener);
         }
     }
 
