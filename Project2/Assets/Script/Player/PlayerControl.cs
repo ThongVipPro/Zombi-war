@@ -13,8 +13,7 @@ public class PlayerControl : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
 
-    [SerializeField]
-    float moveSpeed = 5f;
+    public int moveSpeed = 100;
     float x,
         y;
     bool isWalking;
@@ -106,7 +105,7 @@ public class PlayerControl : MonoBehaviour
 
     void Interact()
     {
-        var isInteractable = Physics2D.OverlapCircle(transform.position, 2f, npc);
+        var isInteractable = Physics2D.OverlapCircle(transform.position, 1.5f, npc);
 
         if (isInteractable != null)
         {
@@ -178,7 +177,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     // This method is for testing purpose
-    int health = 100;
+    public int health = 100;
     int damage = 10;
 
     int money = 0;

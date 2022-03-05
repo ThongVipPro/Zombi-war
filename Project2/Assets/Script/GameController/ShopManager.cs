@@ -22,9 +22,13 @@ public class ShopManager : MonoBehaviour
     [SerializeField]
     Transform shopContent;
 
+    [SerializeField]
+    PlayerControl playerControl;
+
     GameObject item;
 
-    [SerializeField]int money;
+    [SerializeField]
+    int money;
 
     public event Action OnOpenShop;
     public event Action OnCloseShop;
@@ -78,24 +82,34 @@ public class ShopManager : MonoBehaviour
         {
             money -= shopItem.cost;
             purchaseEvent.Invoke(money);
-            shopItem.owned = true;
+            if (shopItem.type == ItemType.Heal)
+            {
+                if (playerControl.health + shopItem.value <= 100)
+                {
+                    playerControl.health += shopItem.value;
+                }
+                else
+                {
+                    playerControl.health = 100;
+                }
+            }
+            else if (shopItem.type == ItemType.Speed)
+            {
+                if (playerControl.moveSpeed + shopItem.value <= 200)
+                {
+                    playerControl.moveSpeed += shopItem.value;
+                }
+                else
+                {
+                    playerControl.moveSpeed = 200;
+                }
+            }
         }
     }
 
     // Change this method's name so that it will be called in GameController.Update() instead.
     public void HandleUpdate()
     {
-        foreach (ShopItems shopItem in shopItems)
-        {
-            if (shopItem.owned)
-            {
-                shopItem.itemRef.SetActive(false);
-            }
-            else
-            {
-                shopItem.itemRef.SetActive(true);
-            }
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CloseShop();
@@ -133,13 +147,18 @@ public class ShopManager : MonoBehaviour
 [System.Serializable]
 public class ShopItems
 {
+    public ItemType type;
     public string name;
     public int cost;
     public Sprite image;
-
-    [HideInInspector]
-    public bool owned;
+    public int value;
 
     [HideInInspector]
     public GameObject itemRef;
+}
+
+public enum ItemType
+{
+    Heal,
+    Speed
 }

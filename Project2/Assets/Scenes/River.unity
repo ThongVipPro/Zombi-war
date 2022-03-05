@@ -2698,28 +2698,39 @@ MonoBehaviour:
   shopUI: {fileID: 1907936942}
   coinControl: {fileID: 1616854613}
   shopItems:
-  - name: Small Heal
+  - type: 0
+    name: Small Heal
     cost: 2
     image: {fileID: -7345978181991845724, guid: b897f2b9546664440b37b6042d821e2c, type: 3}
-    owned: 0
+    value: 20
     itemRef: {fileID: 0}
-  - name: Medium Heal
+  - type: 0
+    name: Medium Heal
     cost: 5
     image: {fileID: 5555359082901882236, guid: b897f2b9546664440b37b6042d821e2c, type: 3}
-    owned: 0
+    value: 30
     itemRef: {fileID: 0}
-  - name: Big Heal
+  - type: 0
+    name: Big Heal
     cost: 10
     image: {fileID: -2717747088714839899, guid: b897f2b9546664440b37b6042d821e2c, type: 3}
-    owned: 0
+    value: 70
     itemRef: {fileID: 0}
-  - name: Speed Upgrade
+  - type: 1
+    name: Small Speed Upgrade
     cost: 15
     image: {fileID: -6464482783528114672, guid: b897f2b9546664440b37b6042d821e2c, type: 3}
-    owned: 0
+    value: 20
+    itemRef: {fileID: 0}
+  - type: 1
+    name: Big Speed Upgrade
+    cost: 20
+    image: {fileID: -6464482783528114672, guid: b897f2b9546664440b37b6042d821e2c, type: 3}
+    value: 40
     itemRef: {fileID: 0}
   itemPrefab: {fileID: 1978746824715214008, guid: 1cb677953cc595745b616af6f62eeda4, type: 3}
   shopContent: {fileID: 748803396}
+  playerControl: {fileID: 822918786}
   money: 0
 --- !u!114 &469390057
 MonoBehaviour:
@@ -3835,7 +3846,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 0, y: 300}
+  m_SizeDelta: {x: -800.00006, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &748803397
 MonoBehaviour:
@@ -3849,7 +3860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
+  m_HorizontalFit: 2
   m_VerticalFit: 0
 --- !u!114 &748803398
 MonoBehaviour:
@@ -3868,7 +3879,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_Spacing: 20
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -4188,6 +4199,7 @@ MonoBehaviour:
     m_Bits: 8
   moveSpeed: 100
   healthBar: {fileID: 1535786352}
+  health: 100
 --- !u!95 &822918787
 Animator:
   serializedVersion: 3
@@ -9322,7 +9334,7 @@ RectTransform:
   m_Father: {fileID: 1102517987}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000000059604645, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -11820,8 +11832,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1402961849}
   m_HandleRect: {fileID: 1402961848}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
