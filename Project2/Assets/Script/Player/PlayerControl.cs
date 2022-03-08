@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -101,6 +102,12 @@ public class PlayerControl : MonoBehaviour
         {
             Interact();
         }
+
+        if (health <= 0)
+        {
+            anim.SetBool("isDead", true);
+            StartCoroutine(Dead());
+        }
     }
 
     void Interact()
@@ -150,15 +157,6 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
-    /// Add a listener for when the player's health is reduced
-    /// </summary>
-    /// <param name="listener"></param>
-    //public void AddHealthChangeEventListener(UnityAction<int> listener)
-    //{
-    //    healthChangeEvent.AddListener(listener);
-    //}
-
-    /// <summary>
     /// Add listener for picking up coin
     /// </summary>
     /// <param name="listener"></param>
@@ -185,24 +183,6 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Cut")
-        {
-            health -= damage;
-            //healthChangeEvent.Invoke(health);
-            healthBar.SetHealth(health);
-        }
-        if (health <= 0)
-        {
-            anim.SetBool("isDead", true);
-            StartCoroutine(Dead());
-        }
-
-        if (collision.gameObject.tag == "Money")
-        {
-            money += 30;
-            Destroy(collision.gameObject);
-            coinPickupEvent.Invoke(money);
-        }
         if (collision.gameObject.tag == "People")
         {
             people++;
@@ -211,9 +191,20 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Money")
+        {
+            money += 30;
+            Destroy(collision.gameObject);
+            coinPickupEvent.Invoke(money);
+        }
+    }
+
     IEnumerator Dead()
     {
-        yield return new WaitForSeconds(0.5f);
-        this.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Time.timeScale = 1f;
     }
 }

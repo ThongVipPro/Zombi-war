@@ -13,7 +13,7 @@ public static class EventManager
     static PlayerControl peopleSavedEventInvoker;
     static UnityAction<int> peopleSavedEventListener;
 
-    //Event listener for purchase
+    // Event listener for purchase
     static ShopManager purchaseEventInvoker;
     static UnityAction<int> purchaseEventListener;
 

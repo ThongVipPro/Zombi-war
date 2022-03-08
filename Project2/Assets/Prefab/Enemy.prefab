@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3849089340817426444}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Creep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3849089340817426443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.95, y: 2.45, z: 0}
+  m_LocalPosition: {x: 2.95, y: 2.45, z: 600}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children:
   - {fileID: 3849089341257490774}
@@ -269,9 +269,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.001720208}
+  m_Offset: {x: 0, y: -0.0018020094}
   serializedVersion: 2
-  m_Radius: 0.02027288
+  m_Radius: 0.019519264
 --- !u!50 &3849089340817426446
 Rigidbody2D:
   serializedVersion: 4
@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6459436a82747ce459abaae279076646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  checkRadius: 10
+  speed: 10
+  checkRadius: 5
   attackRadius: 1
   shouldRotate: 1
   whatIsPlayer:
@@ -372,7 +372,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &3849089341257490776
 MonoBehaviour:

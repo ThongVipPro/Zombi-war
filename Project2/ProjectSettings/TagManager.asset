@@ -10,6 +10,8 @@ TagManager:
   - Money
   - MoneyCount
   - People
+  - Prison
+  - Creep
   layers:
   - Default
   - TransparentFX

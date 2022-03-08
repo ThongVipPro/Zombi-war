@@ -36,8 +36,6 @@ public class EnermyAI : MonoBehaviour
     [SerializeField]
     GameObject CoinPrefab;
 
-    //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
-
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -94,11 +92,6 @@ public class EnermyAI : MonoBehaviour
     {
         rb.MovePosition((Vector2)transform.position + (dir * speed * Time.deltaTime));
     }
-
-    //public void AddHealthChangeEventListener(UnityAction<int> listener)
-    //{
-    //    healthChangeEvent.AddListener(listener);
-    //}
 
     // This method is for testing purpose
     int health = 100;
