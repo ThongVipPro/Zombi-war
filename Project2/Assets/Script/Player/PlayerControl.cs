@@ -13,8 +13,7 @@ public class PlayerControl : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
 
-    [SerializeField]
-    float moveSpeed = 5f;
+    public int moveSpeed = 100;
     float x,
         y;
     bool isWalking;
@@ -25,6 +24,7 @@ public class PlayerControl : MonoBehaviour
 
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
     CoinPickupEvent coinPickupEvent = new CoinPickupEvent();
+    PeopleSavedEvent peopleSavedEvent = new PeopleSavedEvent();
 
     /*public GameObject arrowPrefab1;*/
 
@@ -34,8 +34,12 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        EventManager.AddPlayerHitEventInvoker(this);
         EventManager.AddCoinPickupEventInvoker(this);
+        EventManager.AddPeopleSavedEventInvoker(this);
+        DialogManager.Instance.OnHideDialog += () =>
+        {
+            ShopManager.Instance.OpenShop();
+        };
     }
 
     // Change this method's name so that it will be called in GameController.Update() instead.
@@ -101,10 +105,11 @@ public class PlayerControl : MonoBehaviour
 
     void Interact()
     {
-        var isInteractable = Physics2D.OverlapCircle(transform.position, 2f, npc);
+        var isInteractable = Physics2D.OverlapCircle(transform.position, 1.5f, npc);
 
         if (isInteractable != null)
         {
+            StopMoving();
             isInteractable.GetComponent<NPC>()?.Interact();
         }
     }
@@ -162,11 +167,21 @@ public class PlayerControl : MonoBehaviour
         coinPickupEvent.AddListener(listener);
     }
 
+    /// <summary>
+    /// Add listener for people saved
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddPeopleSavedEventListener(UnityAction<int> listener)
+    {
+        peopleSavedEvent.AddListener(listener);
+    }
+
     // This method is for testing purpose
-    int health = 100;
+    public int health = 100;
     int damage = 10;
 
     int money = 0;
+    int people = 0;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -184,9 +199,15 @@ public class PlayerControl : MonoBehaviour
 
         if (collision.gameObject.tag == "Money")
         {
-            money++;
+            money += 30;
             Destroy(collision.gameObject);
             coinPickupEvent.Invoke(money);
+        }
+        if (collision.gameObject.tag == "People")
+        {
+            people++;
+            Destroy(collision.gameObject);
+            peopleSavedEvent.Invoke(people);
         }
     }
 

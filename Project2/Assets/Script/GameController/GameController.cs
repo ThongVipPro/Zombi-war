@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public enum GameState
 {
     FreeRoam,
-    Dialog
+    Dialog,
+    Shop
 }
 
 public class GameController : MonoBehaviour
@@ -15,6 +16,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     PlayerControl playerControl;
 
+    [SerializeField] MerchantControl merchantControl;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,14 @@ public class GameController : MonoBehaviour
             state = GameState.Dialog;
         };
         DialogManager.Instance.OnHideDialog += () =>
+        {
+            state = GameState.FreeRoam;
+        };
+        ShopManager.Instance.OnOpenShop += () =>
+        {
+            state = GameState.Shop;
+        };
+        ShopManager.Instance.OnCloseShop += () =>
         {
             state = GameState.FreeRoam;
         };
@@ -38,6 +49,10 @@ public class GameController : MonoBehaviour
         else if (state == GameState.Dialog)
         {
             DialogManager.Instance.HandleUpdate();
+        }
+        else if (state == GameState.Shop)
+        {
+            ShopManager.Instance.HandleUpdate();
         }
     }
 }

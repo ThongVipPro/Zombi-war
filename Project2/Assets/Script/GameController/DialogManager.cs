@@ -37,6 +37,13 @@ public class DialogManager : MonoBehaviour
         StartCoroutine(DialogAnim(dialog.Lines[0]));
     }
 
+    public void HideDialog()
+    {
+        OnHideDialog?.Invoke();
+        currentLine = 0;
+        dialogBox?.SetActive(false);
+    }
+
     public IEnumerator DialogAnim(string line)
     {
         isTyping = true;
@@ -63,9 +70,7 @@ public class DialogManager : MonoBehaviour
             }
             else
             {
-                OnHideDialog?.Invoke();
-                currentLine = 0;
-                dialogBox?.SetActive(false);
+                HideDialog();
             }
         }
     }

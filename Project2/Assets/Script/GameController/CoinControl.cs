@@ -5,15 +5,18 @@ using System.Collections.Generic;
 
 public class CoinControl : MonoBehaviour
 {
-    static Text MoneyCount;
-    static int amount;
+    [SerializeField]
+    GameObject counter;
+    static Text moneyCount;
+    public int amount;
 
     // Start is called before the first frame update
     void Start()
     {
-        MoneyCount = GameObject.FindGameObjectWithTag("MoneyCount").GetComponent<Text>();
-        MoneyCount.text = amount.ToString();
+        moneyCount = counter.GetComponent<Text>();
+        moneyCount.text = amount.ToString();
         EventManager.AddCoinPickupEventListener(SetMoney);
+        EventManager.AddPurchaseEventListener(SetMoney);
     }
 
     // Update is called once per frame
@@ -22,6 +25,6 @@ public class CoinControl : MonoBehaviour
     public void SetMoney(int money)
     {
         amount = money;
-        MoneyCount.text = amount.ToString();
+        moneyCount.text = amount.ToString();
     }
 }
