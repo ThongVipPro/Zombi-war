@@ -6060,7 +6060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   moveSpeed: 0.75
-  attackSpeed: 2
+  attackSpeed: 1.5
   attackDamage: 20
   checkRadius: 10
   attackRadius: 2
