@@ -174,7 +174,6 @@ public class PlayerControl : MonoBehaviour
         peopleSavedEvent.AddListener(listener);
     }
 
-    // This method is for testing purpose
     public int health = 100;
     int damage = 10;
 
