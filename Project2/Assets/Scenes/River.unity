@@ -3417,7 +3417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513805847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.46, y: 9.799999, z: -10}
+  m_LocalPosition: {x: 30.33, y: 6.4099994, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4280,7 +4280,7 @@ GameObject:
   - component: {fileID: 794664417}
   - component: {fileID: 794664418}
   - component: {fileID: 794664419}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: prison
   m_TagString: Prison
   m_Icon: {fileID: 0}
@@ -4392,6 +4392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1984714179}
+  maxHealth: 100
 --- !u!114 &794664419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4557,12 +4558,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5796e946c042e184c953e4fc4b5ef3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
+  moveSpeed: 100
   npc:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeed: 100
   healthBar: {fileID: 1535786352}
-  health: 100
 --- !u!95 &822918787
 Animator:
   serializedVersion: 3
@@ -4678,7 +4680,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822918785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.37, y: 9.88, z: 0}
+  m_LocalPosition: {x: 30.24, y: 6.49, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children:
   - {fileID: 1521055475}
@@ -5130,7 +5132,7 @@ GameObject:
   - component: {fileID: 861993161}
   - component: {fileID: 861993160}
   - component: {fileID: 861993159}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: prison (2)
   m_TagString: Prison
   m_Icon: {fileID: 0}
@@ -5178,6 +5180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1186566674}
+  maxHealth: 100
 --- !u!61 &861993161
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5848,7 +5851,7 @@ GameObject:
   - component: {fileID: 996163710}
   - component: {fileID: 996163711}
   - component: {fileID: 996163712}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: prison (1)
   m_TagString: Prison
   m_Icon: {fileID: 0}
@@ -5960,6 +5963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2130731362}
+  maxHealth: 100
 --- !u!114 &996163712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12926,7 +12930,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959841874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.46, y: 9.799999, z: -10}
+  m_LocalPosition: {x: 30.33, y: 6.4099994, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 173718100}
