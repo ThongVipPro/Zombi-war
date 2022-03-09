@@ -40,6 +40,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();

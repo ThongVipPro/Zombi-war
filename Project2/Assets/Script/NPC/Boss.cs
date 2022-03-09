@@ -49,6 +49,7 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -80,6 +81,7 @@ public class Boss : MonoBehaviour
             anim.SetBool("isRunning", false);
             if (attackSpeed <= canAttack)
             {
+                anim.SetTrigger("Attack");
                 GameObject
                     .FindGameObjectWithTag("Player")
                     .gameObject.GetComponent<PlayerControl>()
@@ -131,7 +133,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator Dead()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         // Instantiate a new coin prefab.
         GameObject obj = Instantiate(CoinPrefab, transform.position, transform.rotation);
         Destroy(gameObject);

@@ -49,6 +49,7 @@ public class EnermyAI : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
