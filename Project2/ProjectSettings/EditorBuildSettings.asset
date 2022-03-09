@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/River.unity
     guid: e46c99c99521979439a571aa42e8c754
+  - enabled: 1
+    path: Assets/Scenes/MissionCompleted.unity
+    guid: 84f5753205aaafb4ea9d0d75f61fbf3d
   m_configObjects: {}

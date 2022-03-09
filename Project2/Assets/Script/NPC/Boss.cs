@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
@@ -125,6 +126,7 @@ public class Boss : MonoBehaviour
             anim.SetBool("isDead", true);
             AudioManager.Play(AudioFileName.ZombieDeath);
             StartCoroutine(Dead());
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
         }
         healthBar.SetHealth(health);
     }
