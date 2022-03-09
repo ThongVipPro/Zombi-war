@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3849089340817426444}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Creep
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,10 +305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6459436a82747ce459abaae279076646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  checkRadius: 5
+  maxHealth: 100
+  moveSpeed: 10
+  attackSpeed: 0.5
+  attackDamage: 10
+  checkRadius: 8
   attackRadius: 1
-  shouldRotate: 1
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64

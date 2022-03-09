@@ -6,19 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
+    [SerializeField]
+    int maxHealth = 100;
+    public int health = 0;
+    public int moveSpeed = 100;
+
     Rigidbody2D rb;
+    float x,
+        y;
+    bool isWalking;
+    Vector3 moveDir;
 
     [SerializeField]
     LayerMask npc;
 
     SpriteRenderer spriteRenderer;
     Animator anim;
-
-    public int moveSpeed = 100;
-    float x,
-        y;
-    bool isWalking;
-    Vector3 moveDir;
 
     [SerializeField]
     HealthBar healthBar;
@@ -32,6 +35,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -84,7 +88,6 @@ public class PlayerControl : MonoBehaviour
         }
 
         moveDir = new Vector3(x, y).normalized;
-
         // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
         // Vector3 player = transform.localScale;
         if (Input.GetAxis("Horizontal") < 0)
@@ -97,19 +100,21 @@ public class PlayerControl : MonoBehaviour
         }
         //transform.localScale = player;
 
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
-
-        if (health <= 0)
-        {
-            anim.SetBool("isDead", true);
-            StartCoroutine(Dead());
-        }
     }
 
+    // FixedUpdate is called every frame at the physic engine fps (50)
+    void FixedUpdate()
+    {
+        rb.velocity = moveDir * moveSpeed * Time.deltaTime;
+    }
+
+    /// <summary>
+    /// This is used to interact with npc (merchant in this case)
+    /// </summary>
     void Interact()
     {
         var isInteractable = Physics2D.OverlapCircle(transform.position, 1.5f, npc);
@@ -127,20 +132,6 @@ public class PlayerControl : MonoBehaviour
     void Attack()
     {
         anim.SetTrigger("Attack");
-        //if (Input.GetAxis("Horizontal") < 0)
-        //{
-        //    GameObject arrow = Instantiate(arrowPrefab1, transform.position, Quaternion.identity);
-        //    arrow.GetComponent<Rigidbody2D>().velocity = new Vector2(-1.0f, 0.0f);
-        //}
-        //if (Input.GetAxis("Horizontal") > 0)
-        //{
-        //    GameObject arrow = Instantiate(arrowPrefab1, transform.position, Quaternion.identity);
-        //    arrow.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, 0.0f);
-        //}
-
-        //GameObject gameObject = GameObject.Find("arrow");
-        //gameObject.transform.position = arrowPoint.position;
-        //gameObject.GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
     }
 
     /// <summary>
@@ -151,9 +142,24 @@ public class PlayerControl : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
-    void FixedUpdate()
+    /// <summary>
+    /// Update health amount on change
+    /// </summary>
+    /// <param name="change"></param>
+    public void UpdateHealth(int change)
     {
-        rb.velocity = moveDir * moveSpeed * Time.deltaTime;
+        health += change;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        else if (health <= 0)
+        {
+            health = 0;
+            anim.SetBool("isDead", true);
+            StartCoroutine(Dead());
+        }
+        healthBar.SetHealth(health);
     }
 
     /// <summary>
@@ -174,9 +180,6 @@ public class PlayerControl : MonoBehaviour
         peopleSavedEvent.AddListener(listener);
     }
 
-    public int health = 100;
-    int damage = 10;
-
     int money = 0;
     int people = 0;
 
@@ -194,7 +197,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Money")
         {
-            money += 30;
+            money += Random.Range(1, 5);
             Destroy(collision.gameObject);
             coinPickupEvent.Invoke(money);
         }

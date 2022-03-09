@@ -11,7 +11,7 @@ TagManager:
   - MoneyCount
   - People
   - Prison
-  - Creep
+  - Enemy
   layers:
   - Default
   - TransparentFX

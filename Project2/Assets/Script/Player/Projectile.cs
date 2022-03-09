@@ -5,15 +5,16 @@ using System.Collections.Generic;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
-    private float direction;
-    private bool hit;
-    private Timer destroyTimer;
-    private BoxCollider2D boxCollider2D;
+    float moveSpeed;
+
+    [SerializeField]
+    int damage;
+
+    float direction;
+    Timer destroyTimer;
 
     private void Awake()
     {
-        boxCollider2D = GetComponent<BoxCollider2D>();
         destroyTimer = gameObject.AddComponent<Timer>();
         destroyTimer.Duration = 3;
         destroyTimer.Run();
@@ -24,7 +25,7 @@ public class Projectile : MonoBehaviour
     {
         if (!destroyTimer.Finished)
         {
-            float movementSpeed = speed * Time.deltaTime * direction;
+            float movementSpeed = moveSpeed * Time.deltaTime * direction;
             transform.Translate(movementSpeed, 0, 0);
         }
         else
@@ -33,32 +34,23 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        hit = true;
-        boxCollider2D.enabled = false;
-    }
-
-    public void SetDirection(float _direction)
-    {
-        direction = _direction;
-        gameObject.SetActive(true);
-        hit = false;
-        boxCollider2D.enabled = true;
-
-        float localScalex = transform.localScale.x;
-        if (Mathf.Sign(localScalex) != _direction)
-            localScalex = -localScalex;
-
-        transform.localScale = new Vector3(localScalex, transform.localScale.y, transform.localScale.z);
-    }
-    private void Deactive()
-    {
-        gameObject.SetActive(false);
-    }*/
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnermyAI>().UpdateHealth(-damage);
+        }
+        if (collision.gameObject.tag == "Prison")
+        {
+            collision.gameObject.GetComponent<Cage>().UpdateHealth(-damage);
+        }
+        StartCoroutine(Yeeted());
+    }
+
+    IEnumerator Yeeted()
+    {
+        yield return new WaitForEndOfFrame();
+
         Destroy(gameObject);
     }
 }

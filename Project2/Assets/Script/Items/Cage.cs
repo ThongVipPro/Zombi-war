@@ -7,37 +7,43 @@ public class Cage : MonoBehaviour
     [SerializeField]
     HealthBar healthBar;
 
+    [SerializeField]
+    int maxHealth = 100;
+    int health = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = maxHealth;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() { }
 
-    int health = 100;
-    int damage = 10;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// Update health amount on change
+    /// </summary>
+    /// <param name="change"></param>
+    public void UpdateHealth(int change)
     {
-        if (collision.gameObject.tag == "Projectile")
+        health += change;
+        if (health > maxHealth)
         {
-            health -= damage;
-            healthBar.SetHealth(health);
+            health = maxHealth;
         }
-        if (health <= 0)
+        else if (health <= 0)
         {
+            health = 0;
             StartCoroutine(Dead());
         }
+        healthBar.SetHealth(health);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) { }
 
     IEnumerator Dead()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForEndOfFrame();
         Destroy(gameObject);
     }
 }
