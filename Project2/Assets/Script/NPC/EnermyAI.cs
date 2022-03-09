@@ -124,6 +124,7 @@ public class EnermyAI : MonoBehaviour
         {
             health = 0;
             anim.SetBool("isDead", true);
+            AudioManager.Play(AudioFileName.ZombieDeath);
             StartCoroutine(Dead());
         }
         healthBar.SetHealth(health);

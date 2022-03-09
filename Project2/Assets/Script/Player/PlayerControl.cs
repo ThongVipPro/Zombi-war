@@ -10,11 +10,12 @@ public class PlayerControl : MonoBehaviour
     int maxHealth = 100;
     public int health = 0;
     public int moveSpeed = 100;
+    Collider2D isInteractable;
 
     Rigidbody2D rb;
     float x,
         y;
-    bool isWalking;
+    public bool isWalking;
     Vector3 moveDir;
 
     [SerializeField]
@@ -25,6 +26,9 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField]
     HealthBar healthBar;
+
+    [SerializeField]
+    Dialog dialog;
 
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
     CoinPickupEvent coinPickupEvent = new CoinPickupEvent();
@@ -43,7 +47,10 @@ public class PlayerControl : MonoBehaviour
         EventManager.AddPeopleSavedEventInvoker(this);
         DialogManager.Instance.OnHideDialog += () =>
         {
-            ShopManager.Instance.OpenShop();
+            if (isInteractable != null)
+            {
+                ShopManager.Instance.OpenShop();
+            }
         };
     }
 
@@ -52,7 +59,7 @@ public class PlayerControl : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
-
+        isInteractable = Physics2D.OverlapCircle(transform.position, 1.5f, npc);
         /*if (Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("Attack");
@@ -63,6 +70,7 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Attack();
+                AudioManager.Play(AudioFileName.PlayerAttack);
             }
         }
 
@@ -117,11 +125,8 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     void Interact()
     {
-        var isInteractable = Physics2D.OverlapCircle(transform.position, 1.5f, npc);
-
         if (isInteractable != null)
         {
-            StopMoving();
             isInteractable.GetComponent<NPC>()?.Interact();
         }
     }
@@ -137,7 +142,7 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// Stops the player from moving
     /// </summary>
-    private void StopMoving()
+    public void StopMoving()
     {
         rb.velocity = Vector3.zero;
     }
@@ -181,15 +186,27 @@ public class PlayerControl : MonoBehaviour
     }
 
     int money = 0;
-    int people = 0;
+    int people = 2;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "People")
         {
             people++;
+            if (people == 3)
+            {
+                DialogManager.Instance.ShowDialog(dialog, gameObject);
+            }
             Destroy(collision.gameObject);
             peopleSavedEvent.Invoke(people);
+        }
+
+        if (collision.gameObject.tag == "Gate")
+        {
+            if (people == 3)
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 
@@ -198,6 +215,7 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.tag == "Money")
         {
             money += Random.Range(1, 5);
+            AudioManager.Play(AudioFileName.Coin);
             Destroy(collision.gameObject);
             coinPickupEvent.Invoke(money);
         }

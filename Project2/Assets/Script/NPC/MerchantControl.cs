@@ -13,7 +13,7 @@ public class MerchantControl : MonoBehaviour, NPC
 
     public void Interact()
     {
-        DialogManager.Instance.ShowDialog(dialog);
+        DialogManager.Instance.ShowDialog(dialog, gameObject);
     }
 
     // Start is called before the first frame update
@@ -21,6 +21,7 @@ public class MerchantControl : MonoBehaviour, NPC
     {
         target = GameObject.FindWithTag("Player").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
     }
 
     // Update is called once per frame

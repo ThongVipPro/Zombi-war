@@ -84,14 +84,7 @@ public class ShopManager : MonoBehaviour
             purchaseEvent.Invoke(money);
             if (shopItem.type == ItemType.Heal)
             {
-                if (playerControl.health + shopItem.value <= 100)
-                {
-                    playerControl.health += shopItem.value;
-                }
-                else
-                {
-                    playerControl.health = 100;
-                }
+                playerControl.UpdateHealth(shopItem.value);
             }
             else if (shopItem.type == ItemType.Speed)
             {

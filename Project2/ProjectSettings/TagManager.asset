@@ -12,6 +12,7 @@ TagManager:
   - People
   - Prison
   - Enemy
+  - Gate
   layers:
   - Default
   - TransparentFX

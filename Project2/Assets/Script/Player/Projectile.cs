@@ -50,7 +50,6 @@ public class Projectile : MonoBehaviour
     IEnumerator Yeeted()
     {
         yield return new WaitForEndOfFrame();
-
         Destroy(gameObject);
     }
 }
