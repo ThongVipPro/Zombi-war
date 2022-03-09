@@ -19,8 +19,6 @@ public class DialogManager : MonoBehaviour
     Dialog dialog;
     bool isTyping;
 
-    GameObject invoker;
-
     public event Action OnShowDialog;
     public event Action OnHideDialog;
 
@@ -31,16 +29,15 @@ public class DialogManager : MonoBehaviour
         Instance = this;
     }
 
-    public void ShowDialog(Dialog dialog, GameObject gameObject)
+    public void ShowDialog(Dialog dialog)
     {
-        invoker = gameObject;
         OnShowDialog?.Invoke();
         this.dialog = dialog;
         dialogBox.SetActive(true);
         StartCoroutine(DialogAnim(dialog.Lines[0]));
     }
 
-    public void HideDialog(GameObject gameObject)
+    public void HideDialog()
     {
         OnHideDialog?.Invoke();
         dialogBox?.SetActive(false);
@@ -72,7 +69,7 @@ public class DialogManager : MonoBehaviour
             }
             else
             {
-                HideDialog(invoker);
+                HideDialog();
             }
         }
     }

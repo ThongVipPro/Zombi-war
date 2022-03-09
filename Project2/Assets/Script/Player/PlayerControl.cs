@@ -30,6 +30,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     Dialog dialog;
 
+    [SerializeField]Dialog dialog2;
+
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
     CoinPickupEvent coinPickupEvent = new CoinPickupEvent();
     PeopleSavedEvent peopleSavedEvent = new PeopleSavedEvent();
@@ -39,6 +41,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DialogManager.Instance.ShowDialog(dialog2);
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         rb = GetComponent<Rigidbody2D>();
@@ -196,7 +199,7 @@ public class PlayerControl : MonoBehaviour
             people++;
             if (people == 3)
             {
-                DialogManager.Instance.ShowDialog(dialog, gameObject);
+                DialogManager.Instance.ShowDialog(dialog);
             }
             Destroy(collision.gameObject);
             peopleSavedEvent.Invoke(people);

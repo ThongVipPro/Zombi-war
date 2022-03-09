@@ -4887,6 +4887,13 @@ MonoBehaviour:
   dialog:
     lines:
     - Bridge is opened. Go fight the boss now!
+  dialog2:
+    lines:
+    - Greetings, comrade.
+    - There are currently 3 officers being trapped inside the city.
+    - It's your duty to go rescue them and defeat the patient zero.
+    - Only then could we finally put an end to the zombie pandemic.
+    - Good luck!
 --- !u!95 &822918787
 Animator:
   serializedVersion: 3

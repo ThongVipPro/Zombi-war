@@ -13,7 +13,7 @@ public class MerchantControl : MonoBehaviour, NPC
 
     public void Interact()
     {
-        DialogManager.Instance.ShowDialog(dialog, gameObject);
+        DialogManager.Instance.ShowDialog(dialog);
     }
 
     // Start is called before the first frame update
