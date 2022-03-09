@@ -44,6 +44,10 @@ public class Projectile : MonoBehaviour
         {
             collision.gameObject.GetComponent<Cage>().UpdateHealth(-damage);
         }
+        if (collision.gameObject.tag == "Boss")
+        {
+            collision.gameObject.GetComponent<Boss>().UpdateHealth(-damage);
+        }
         StartCoroutine(Yeeted());
     }
 

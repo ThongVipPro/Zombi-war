@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-public class EnermyAI : MonoBehaviour
+public class Boss : MonoBehaviour
 {
     [SerializeField]
     int maxHealth = 100;
@@ -131,7 +131,7 @@ public class EnermyAI : MonoBehaviour
 
     IEnumerator Dead()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         // Instantiate a new coin prefab.
         GameObject obj = Instantiate(CoinPrefab, transform.position, transform.rotation);
         Destroy(gameObject);

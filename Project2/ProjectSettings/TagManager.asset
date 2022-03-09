@@ -13,6 +13,7 @@ TagManager:
   - Prison
   - Enemy
   - Gate
+  - Boss
   layers:
   - Default
   - TransparentFX
