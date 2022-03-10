@@ -4,9 +4,13 @@ using System.Collections.Generic;
 
 public class SpawnController : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField]
+    GameObject enemyPrefab;
+    int i = 0;
 
-    const float SpawnBorderSize = 5f;
+    Timer timer;
+
+    const float SpawnBorderSize = 4f;
     float minSpawnX;
     float maxSpawnX;
     float minSpawnY;
@@ -20,23 +24,33 @@ public class SpawnController : MonoBehaviour
         minSpawnY = transform.position.y - SpawnBorderSize;
         maxSpawnY = transform.position.y + SpawnBorderSize;
 
-        for(int i = 0; i < 20; i++)
-        {
-            Spawner();
-        }
+        timer = gameObject.AddComponent<Timer>();
+        timer.Duration = 0.01f;
+        timer.Run();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (timer.Finished)
+        {
+            if (i < 20)
+            {
+                Spawner();
+                i++;
+                timer.Duration = 0.01f;
+                timer.Run();
+            }
+        }
     }
 
     void Spawner()
     {
-        Vector3 location = new Vector3(Random.Range(minSpawnX, maxSpawnX),
-                                       Random.Range(minSpawnY, maxSpawnY),
-                                       transform.position.z);
+        Vector3 location = new Vector3(
+            Random.Range(minSpawnX, maxSpawnX),
+            Random.Range(minSpawnY, maxSpawnY),
+            transform.position.z
+        );
 
         GameObject enemy = Instantiate(enemyPrefab) as GameObject;
         enemy.transform.position = location;

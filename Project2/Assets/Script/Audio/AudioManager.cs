@@ -35,4 +35,9 @@ public static class AudioManager
         audioSource.loop = true;
         audioSource.PlayOneShot(audioClips[name]);
     }
+
+    public static void Stop()
+    {
+        audioSource.Stop();
+    }
 }

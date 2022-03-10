@@ -190,7 +190,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     int money = 0;
-    int people = 2;
+    int people = 0;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

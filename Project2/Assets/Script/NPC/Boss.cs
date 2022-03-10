@@ -11,7 +11,7 @@ public class Boss : MonoBehaviour
     int health = 0;
 
     [SerializeField]
-    float moveSpeed;
+    float moveSpeed = 10;
 
     [SerializeField]
     float attackSpeed = 1f;
@@ -26,8 +26,7 @@ public class Boss : MonoBehaviour
     float attackRadius;
     float canAttack;
 
-
-    bool shouldRotate;
+    bool isDead = false;
 
     [SerializeField]
     LayerMask whatIsPlayer;
@@ -59,39 +58,49 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        anim.SetBool("isRunning", isInChaseRange);
-        isInChaseRange = Physics2D.OverlapCircle(transform.position, checkRadius, whatIsPlayer);
-        isInAttackRange = Physics2D.OverlapCircle(transform.position, attackRadius, whatIsPlayer);
+        if (target != null)
+        {
+            anim.SetBool("isRunning", isInChaseRange);
+            isInChaseRange = Physics2D.OverlapCircle(transform.position, checkRadius, whatIsPlayer);
+            isInAttackRange = Physics2D.OverlapCircle(
+                transform.position,
+                attackRadius,
+                whatIsPlayer
+            );
 
-        dir = target.position - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        anim.SetFloat("X", dir.x);
-        anim.SetFloat("Y", dir.y);
-        // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
-        //Vector3 xxx = transform.localScale;
-        if ((target.position.x - transform.position.x) < 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        if ((target.position.x - transform.position.x) > 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        if (isInAttackRange)
-        {
-            anim.SetBool("isRunning", false);
-            if (attackSpeed <= canAttack)
+            dir = target.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            anim.SetFloat("X", dir.x);
+            anim.SetFloat("Y", dir.y);
+            // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
+            //Vector3 xxx = transform.localScale;
+            if ((target.position.x - transform.position.x) < 0)
             {
-                anim.SetTrigger("Attack");
-                GameObject
-                    .FindGameObjectWithTag("Player")
-                    .gameObject.GetComponent<PlayerControl>()
-                    .UpdateHealth(-attackDamage);
-                canAttack = 0;
+                spriteRenderer.flipX = true;
             }
-            else
+            if ((target.position.x - transform.position.x) > 0)
             {
-                canAttack += Time.deltaTime;
+                spriteRenderer.flipX = false;
+            }
+            if (isInAttackRange)
+            {
+                anim.SetBool("isRunning", false);
+                if (!isDead)
+                {
+                    if (attackSpeed <= canAttack)
+                    {
+                        anim.SetTrigger("Attack");
+                        GameObject
+                            .FindGameObjectWithTag("Player")
+                            .gameObject.GetComponent<PlayerControl>()
+                            .UpdateHealth(-attackDamage);
+                        canAttack = 0;
+                    }
+                    else
+                    {
+                        canAttack += Time.deltaTime;
+                    }
+                }
             }
         }
     }
@@ -123,10 +132,14 @@ public class Boss : MonoBehaviour
         else if (health <= 0)
         {
             health = 0;
+
             anim.SetBool("isDead", true);
-            AudioManager.Play(AudioFileName.ZombieDeath);
+            if (!isDead)
+            {
+                AudioManager.Play(AudioFileName.ZombieDeath);
+            }
+            isDead = true;
             StartCoroutine(Dead());
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
         }
         healthBar.SetHealth(health);
     }
@@ -135,9 +148,8 @@ public class Boss : MonoBehaviour
 
     IEnumerator Dead()
     {
-        yield return new WaitForSeconds(0.8f);
-        // Instantiate a new coin prefab.
-        GameObject obj = Instantiate(CoinPrefab, transform.position, transform.rotation);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(2);
+        AudioManager.Stop();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

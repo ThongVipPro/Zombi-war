@@ -25,14 +25,14 @@ public class EnermyAI : MonoBehaviour
     float attackRadius;
     float canAttack;
 
-
-    bool shouldRotate;
+    bool isDead = false;
 
     [SerializeField]
     LayerMask whatIsPlayer;
 
     SpriteRenderer spriteRenderer;
-    Transform target;
+
+    GameObject target;
     Rigidbody2D rb;
     Animator anim;
     Vector3 dir;
@@ -53,43 +53,52 @@ public class EnermyAI : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        target = GameObject.FindWithTag("Player").transform;
     }
 
     private void Update()
     {
-        anim.SetBool("isRunning", isInChaseRange);
-        isInChaseRange = Physics2D.OverlapCircle(transform.position, checkRadius, whatIsPlayer);
-        isInAttackRange = Physics2D.OverlapCircle(transform.position, attackRadius, whatIsPlayer);
-
-        dir = target.position - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        anim.SetFloat("X", dir.x);
-        anim.SetFloat("Y", dir.y);
-        // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
-        //Vector3 xxx = transform.localScale;
-        if ((target.position.x - transform.position.x) < 0)
+        target = GameObject.FindGameObjectWithTag("Player");
+        if (target != null)
         {
-            spriteRenderer.flipX = true;
-        }
-        if ((target.position.x - transform.position.x) > 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        if (isInAttackRange)
-        {
-            anim.SetBool("isRunning", false);
-            if (attackSpeed <= canAttack)
+            anim.SetBool("isRunning", isInChaseRange);
+            isInChaseRange = Physics2D.OverlapCircle(transform.position, checkRadius, whatIsPlayer);
+            isInAttackRange = Physics2D.OverlapCircle(
+                transform.position,
+                attackRadius,
+                whatIsPlayer
+            );
+            dir = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            anim.SetFloat("X", dir.x);
+            anim.SetFloat("Y", dir.y);
+            // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
+            //Vector3 xxx = transform.localScale;
+            if ((target.transform.position.x - transform.position.x) < 0)
             {
-                GameObject
-                    .FindGameObjectWithTag("Player")
-                    .gameObject.GetComponent<PlayerControl>()
-                    .UpdateHealth(-attackDamage);
-                canAttack = 0;
+                spriteRenderer.flipX = true;
             }
-            else
+            if ((target.transform.position.x - transform.position.x) > 0)
             {
-                canAttack += Time.deltaTime;
+                spriteRenderer.flipX = false;
+            }
+            if (isInAttackRange)
+            {
+                anim.SetBool("isRunning", false);
+                if (!isDead)
+                {
+                    if (attackSpeed <= canAttack)
+                    {
+                        GameObject
+                            .FindGameObjectWithTag("Player")
+                            .gameObject.GetComponent<PlayerControl>()
+                            .UpdateHealth(-attackDamage);
+                        canAttack = 0;
+                    }
+                    else
+                    {
+                        canAttack += Time.deltaTime;
+                    }
+                }
             }
         }
     }
@@ -122,7 +131,11 @@ public class EnermyAI : MonoBehaviour
         {
             health = 0;
             anim.SetBool("isDead", true);
-            AudioManager.Play(AudioFileName.ZombieDeath);
+            if (!isDead)
+            {
+                AudioManager.Play(AudioFileName.ZombieDeath);
+            }
+            isDead = true;
             StartCoroutine(Dead());
         }
         healthBar.SetHealth(health);
