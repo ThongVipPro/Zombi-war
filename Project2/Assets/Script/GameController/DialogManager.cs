@@ -60,7 +60,7 @@ public class DialogManager : MonoBehaviour
     // Change this method's name so that it will be called in GameController.Update() instead.
     public void HandleUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isTyping)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0) && !isTyping)
         {
             currentLine++;
             if (currentLine < dialog.Lines.Count)

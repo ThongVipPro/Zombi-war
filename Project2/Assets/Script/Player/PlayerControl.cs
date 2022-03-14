@@ -14,7 +14,9 @@ public class PlayerControl : MonoBehaviour
 
     Rigidbody2D rb;
     float x,
-        y;
+        y,
+        phoneX,
+        phoneY;
     public bool isWalking;
     Vector3 moveDir;
 
@@ -30,7 +32,11 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     Dialog dialog;
 
-    [SerializeField]Dialog dialog2;
+    [SerializeField]
+    Dialog dialog2;
+
+    [SerializeField]
+    GameObject poi;
 
     //HealthChangeEvent healthChangeEvent = new HealthChangeEvent();
     CoinPickupEvent coinPickupEvent = new CoinPickupEvent();
@@ -56,32 +62,77 @@ public class PlayerControl : MonoBehaviour
                 ShopManager.Instance.OpenShop();
             }
         };
+
+        phoneX = phoneY = 0;
     }
 
     // Change this method's name so that it will be called in GameController.Update() instead.
     public void HandleUpdate()
     {
-        x = Input.GetAxisRaw("Horizontal");
-        y = Input.GetAxisRaw("Vertical");
         isInteractable = Physics2D.OverlapCircle(transform.position, 1.5f, npc);
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            anim.SetTrigger("Attack");
-        }*/
 
-        if (x == 0 || y == 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Attack();
-                AudioManager.Play(AudioFileName.PlayerAttack);
-            }
-        }
+        //// Controls for pc.
+        //x = Input.GetAxisRaw("Horizontal");
+        //y = Input.GetAxisRaw("Vertical");
+        ///*if (Input.GetMouseButtonDown(0))
+        //{
+        //    anim.SetTrigger("Attack");
+        //}*/
 
-        if (x != 0 || y != 0)
+        //if (x == 0 || y == 0)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        Attack();
+        //        AudioManager.Play(AudioFileName.PlayerAttack);
+        //    }
+        //}
+
+        //if (x != 0 || y != 0)
+        //{
+        //    anim.SetFloat("X", x);
+        //    anim.SetFloat("Y", y);
+
+        //    if (!isWalking)
+        //    {
+        //        isWalking = true;
+        //        anim.SetBool("IsMoving", isWalking);
+        //    }
+        //}
+        //else
+        //{
+        //    if (isWalking)
+        //    {
+        //        isWalking = false;
+        //        anim.SetBool("IsMoving", isWalking);
+        //        StopMoving();
+        //    }
+        //}
+
+        //moveDir = new Vector3(x, y).normalized;
+        //// Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
+        //// Vector3 player = transform.localScale;
+        //if (Input.GetAxis("Horizontal") < 0)
+        //{
+        //    spriteRenderer.flipX = true;
+        //}
+        //if (Input.GetAxis("Horizontal") > 0)
+        //{
+        //    spriteRenderer.flipX = false;
+        //}
+        ////transform.localScale = player;
+
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    Interact();
+        //}
+
+        // Controls for phone.
+
+        if (phoneX != 0 || phoneY != 0)
         {
-            anim.SetFloat("X", x);
-            anim.SetFloat("Y", y);
+            anim.SetFloat("X", phoneX);
+            anim.SetFloat("Y", phoneY);
 
             if (!isWalking)
             {
@@ -99,23 +150,61 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        moveDir = new Vector3(x, y).normalized;
-        // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
-        // Vector3 player = transform.localScale;
-        if (Input.GetAxis("Horizontal") < 0)
+        moveDir = new Vector3(phoneX, phoneY).normalized;
+
+        if (phoneX < 0)
         {
             spriteRenderer.flipX = true;
         }
-        if (Input.GetAxis("Horizontal") > 0)
+        if (phoneX > 0)
         {
             spriteRenderer.flipX = false;
         }
-        //transform.localScale = player;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (isInteractable != null)
         {
-            Interact();
+            poi.SetActive(true);
         }
+    }
+
+    public void ButtonUpTop()
+    {
+        phoneY -= 1;
+    }
+
+    public void ButtonDownTop()
+    {
+        phoneY += 1;
+    }
+
+    public void ButtonUpBottom()
+    {
+        phoneY += 1;
+    }
+
+    public void ButtonDownBottom()
+    {
+        phoneY -= 1;
+    }
+
+    public void ButtonUpLeft()
+    {
+        phoneX += 1;
+    }
+
+    public void ButtonDownLeft()
+    {
+        phoneX -= 1;
+    }
+
+    public void ButtonUpRight()
+    {
+        phoneX -= 1;
+    }
+
+    public void ButtonDownRight()
+    {
+        phoneX += 1;
     }
 
     // FixedUpdate is called every frame at the physic engine fps (50)
@@ -127,7 +216,7 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// This is used to interact with npc (merchant in this case)
     /// </summary>
-    void Interact()
+    public void Interact()
     {
         if (isInteractable != null)
         {
@@ -138,9 +227,12 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// Makes the player attack
     /// </summary>
-    void Attack()
+    public void Attack()
     {
+        //anim.SetFloat("X", phoneX);
+        //anim.SetFloat("Y", phoneY);
         anim.SetTrigger("Attack");
+        AudioManager.Play(AudioFileName.PlayerAttack);
     }
 
     /// <summary>

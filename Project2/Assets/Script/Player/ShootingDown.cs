@@ -14,9 +14,14 @@ public class ShootingDown : MonoBehaviour
     [SerializeField]
     float bulletForce = 5f;
 
+    Animator anim;
+
     private float nextShootTimer;
 
-    void Start() { }
+    void Start()
+    {
+        anim = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -32,10 +37,11 @@ public class ShootingDown : MonoBehaviour
     /// <summary>
     /// Instantiates the projectile in the determined direction
     /// </summary>
-    void Shoot()
+    public void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce((-firePoint.up) * bulletForce, ForceMode2D.Impulse);
+        //anim.SetFloat("Y", -1);
     }
 }

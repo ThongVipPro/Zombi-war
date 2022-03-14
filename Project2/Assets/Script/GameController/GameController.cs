@@ -20,6 +20,11 @@ public class GameController : MonoBehaviour
     [SerializeField]
     MerchantControl merchantControl;
 
+    [SerializeField]
+    GameObject UIController;
+
+    private void Awake() { }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +49,11 @@ public class GameController : MonoBehaviour
         AudioManager.PlayOnRepeat(AudioFileName.BGM);
     }
 
+    public void CloseShop()
+    {
+        state = GameState.FreeRoam;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -54,16 +64,19 @@ public class GameController : MonoBehaviour
                 player.SetActive(true);
             }
             playerControl.HandleUpdate();
+            UIController.SetActive(true);
         }
         else if (state == GameState.Dialog)
         {
             player.SetActive(false);
             DialogManager.Instance.HandleUpdate();
+            UIController.SetActive(false);
         }
         else if (state == GameState.Shop)
         {
             player.SetActive(false);
             ShopManager.Instance.HandleUpdate();
+            UIController.SetActive(false);
         }
     }
 }
