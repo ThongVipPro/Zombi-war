@@ -21,6 +21,9 @@ public class PlayerControl : MonoBehaviour
     Vector3 moveDir;
 
     [SerializeField]
+    Transform minimapIndicator;
+
+    [SerializeField]
     LayerMask npc;
 
     SpriteRenderer spriteRenderer;
@@ -115,10 +118,26 @@ public class PlayerControl : MonoBehaviour
         //if (Input.GetAxis("Horizontal") < 0)
         //{
         //    spriteRenderer.flipX = true;
+        //    if (moveDir.y == 0)
+        //    {
+        //        minimapIndicator.eulerAngles = new Vector3(0, 0, -90);
+        //    }
         //}
         //if (Input.GetAxis("Horizontal") > 0)
         //{
         //    spriteRenderer.flipX = false;
+        //    if (moveDir.y == 0)
+        //    {
+        //        minimapIndicator.eulerAngles = new Vector3(0, 0, 90);
+        //    }
+        //}
+        //if (Input.GetAxis("Vertical") < 0)
+        //{
+        //    minimapIndicator.eulerAngles = new Vector3(0, 0, 0);
+        //}
+        //if (Input.GetAxis("Vertical") > 0)
+        //{
+        //    minimapIndicator.eulerAngles = new Vector3(0, 0, 180);
         //}
         ////transform.localScale = player;
 
@@ -128,7 +147,6 @@ public class PlayerControl : MonoBehaviour
         //}
 
         // Controls for phone.
-
         if (phoneX != 0 || phoneY != 0)
         {
             anim.SetFloat("X", phoneX);
@@ -155,10 +173,26 @@ public class PlayerControl : MonoBehaviour
         if (phoneX < 0)
         {
             spriteRenderer.flipX = true;
+            if (moveDir.y == 0)
+            {
+                minimapIndicator.eulerAngles = new Vector3(0, 0, -90);
+            }
         }
         if (phoneX > 0)
         {
             spriteRenderer.flipX = false;
+            if (moveDir.y == 0)
+            {
+                minimapIndicator.eulerAngles = new Vector3(0, 0, 90);
+            }
+        }
+        if (phoneY < 0)
+        {
+            minimapIndicator.eulerAngles = new Vector3(0, 0, 0);
+        }
+        if (phoneY > 0)
+        {
+            minimapIndicator.eulerAngles = new Vector3(0, 0, 180);
         }
 
         if (isInteractable != null)
