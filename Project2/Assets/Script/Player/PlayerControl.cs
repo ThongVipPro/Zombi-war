@@ -146,7 +146,7 @@ public class PlayerControl : MonoBehaviour
         //    Interact();
         //}
 
-        // Controls for phone.
+        //Controls for phone.
         if (phoneX != 0 || phoneY != 0)
         {
             anim.SetFloat("X", phoneX);
@@ -336,6 +336,10 @@ public class PlayerControl : MonoBehaviour
             if (people == 3)
             {
                 Destroy(collision.gameObject);
+            }
+            else
+            {
+
             }
         }
     }
