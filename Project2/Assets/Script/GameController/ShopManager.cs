@@ -30,6 +30,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField]
     int money;
 
+    [SerializeField]
+    int moveSpeedMax;
+
     public event Action OnOpenShop;
     public event Action OnCloseShop;
     CoinPickupEvent purchaseEvent = new CoinPickupEvent();
@@ -88,13 +91,13 @@ public class ShopManager : MonoBehaviour
             }
             else if (shopItem.type == ItemType.Speed)
             {
-                if (playerControl.moveSpeed + shopItem.value <= 200)
+                if (playerControl.moveSpeed + shopItem.value <= moveSpeedMax)
                 {
                     playerControl.moveSpeed += shopItem.value;
                 }
                 else
                 {
-                    playerControl.moveSpeed = 200;
+                    playerControl.moveSpeed = moveSpeedMax;
                 }
             }
         }

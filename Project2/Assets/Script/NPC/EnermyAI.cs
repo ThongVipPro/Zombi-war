@@ -10,7 +10,10 @@ public class EnermyAI : MonoBehaviour
     int health = 0;
 
     [SerializeField]
-    float moveSpeed;
+    float moveSpeedMax;
+
+    [SerializeField]
+    float moveSpeedMin;
 
     [SerializeField]
     float attackSpeed = 1f;
@@ -108,7 +111,10 @@ public class EnermyAI : MonoBehaviour
     {
         if (isInChaseRange && !isInAttackRange)
         {
-            rb.MovePosition(transform.position + (dir.normalized * moveSpeed * Time.deltaTime));
+            rb.MovePosition(
+                transform.position
+                    + (dir.normalized * Random.Range(moveSpeedMin, moveSpeedMax) * Time.deltaTime)
+            );
         }
         if (isInAttackRange)
         {

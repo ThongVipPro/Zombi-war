@@ -30,12 +30,6 @@ public static class AudioManager
         audioSource.PlayOneShot(audioClips[name]);
     }
 
-    public static void PlayOnRepeat(AudioFileName name)
-    {
-        audioSource.loop = true;
-        audioSource.PlayOneShot(audioClips[name]);
-    }
-
     public static void Stop()
     {
         audioSource.Stop();

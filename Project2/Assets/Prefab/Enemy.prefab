@@ -314,11 +314,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 12
+  moveSpeedMax: 30
+  moveSpeedMin: 15
   attackSpeed: 0.3
   attackDamage: 10
-  checkRadius: 8
-  attackRadius: 0.7
+  checkRadius: 15
+  attackRadius: 0.8
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64

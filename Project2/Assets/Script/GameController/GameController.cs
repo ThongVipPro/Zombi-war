@@ -45,8 +45,6 @@ public class GameController : MonoBehaviour
         {
             state = GameState.FreeRoam;
         };
-
-        AudioManager.PlayOnRepeat(AudioFileName.BGM);
     }
 
     public void CloseShop()
