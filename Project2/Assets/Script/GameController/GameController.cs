@@ -62,19 +62,19 @@ public class GameController : MonoBehaviour
                 player.SetActive(true);
             }
             playerControl.HandleUpdate();
-            UIController.SetActive(true);
+            //UIController.SetActive(true);
         }
         else if (state == GameState.Dialog)
         {
             player.SetActive(false);
             DialogManager.Instance.HandleUpdate();
-            UIController.SetActive(false);
+            //UIController.SetActive(false);
         }
         else if (state == GameState.Shop)
         {
             player.SetActive(false);
             ShopManager.Instance.HandleUpdate();
-            UIController.SetActive(false);
+            //UIController.SetActive(false);
         }
     }
 }

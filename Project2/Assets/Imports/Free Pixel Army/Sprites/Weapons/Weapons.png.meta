@@ -36,6 +36,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -217,7 +218,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a32e4121dbf79534987e96caac219623
-      internalID: -8951780388439148649
+      internalID: 7732520197501582212
       vertices: []
       indices: 
       edges: []
@@ -232,6 +233,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Sawed-Off: -761887118410055393
+      AK-47: 5601323976189978565
+      AWP: 7732520197501582212
+      M134: 9147546874185701050
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

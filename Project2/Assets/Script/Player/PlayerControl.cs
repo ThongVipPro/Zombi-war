@@ -74,83 +74,27 @@ public class PlayerControl : MonoBehaviour
     {
         isInteractable = Physics2D.OverlapCircle(transform.position, 1.5f, npc);
 
-        //// Controls for pc.
-        //x = Input.GetAxisRaw("Horizontal");
-        //y = Input.GetAxisRaw("Vertical");
-        ///*if (Input.GetMouseButtonDown(0))
-        //{
-        //    anim.SetTrigger("Attack");
-        //}*/
-
-        //if (x == 0 || y == 0)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        Attack();
-        //        AudioManager.Play(AudioFileName.PlayerAttack);
-        //    }
-        //}
-
-        //if (x != 0 || y != 0)
-        //{
-        //    anim.SetFloat("X", x);
-        //    anim.SetFloat("Y", y);
-
-        //    if (!isWalking)
-        //    {
-        //        isWalking = true;
-        //        anim.SetBool("IsMoving", isWalking);
-        //    }
-        //}
-        //else
-        //{
-        //    if (isWalking)
-        //    {
-        //        isWalking = false;
-        //        anim.SetBool("IsMoving", isWalking);
-        //        StopMoving();
-        //    }
-        //}
-
-        //moveDir = new Vector3(x, y).normalized;
-        //// Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
-        //// Vector3 player = transform.localScale;
-        //if (Input.GetAxis("Horizontal") < 0)
-        //{
-        //    spriteRenderer.flipX = true;
-        //    if (moveDir.y == 0)
-        //    {
-        //        minimapIndicator.eulerAngles = new Vector3(0, 0, -90);
-        //    }
-        //}
-        //if (Input.GetAxis("Horizontal") > 0)
-        //{
-        //    spriteRenderer.flipX = false;
-        //    if (moveDir.y == 0)
-        //    {
-        //        minimapIndicator.eulerAngles = new Vector3(0, 0, 90);
-        //    }
-        //}
-        //if (Input.GetAxis("Vertical") < 0)
-        //{
-        //    minimapIndicator.eulerAngles = new Vector3(0, 0, 0);
-        //}
-        //if (Input.GetAxis("Vertical") > 0)
-        //{
-        //    minimapIndicator.eulerAngles = new Vector3(0, 0, 180);
-        //}
-        ////transform.localScale = player;
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    Interact();
-        //}
-
-        //Controls for phone.
-        if (phoneX != 0 || phoneY != 0)
+        // Controls for pc.
+        x = Input.GetAxisRaw("Horizontal");
+        y = Input.GetAxisRaw("Vertical");
+        /*if (Input.GetMouseButtonDown(0))
         {
-            anim.SetFloat("X", phoneX);
-            anim.SetFloat("Y", phoneY);
+            anim.SetTrigger("Attack");
+        }*/
+
+        if (x == 0 || y == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Attack();
+                AudioManager.Play(AudioFileName.PlayerAttack);
+            }
+        }
+
+        if (x != 0 || y != 0)
+        {
+            anim.SetFloat("X", x);
+            anim.SetFloat("Y", y);
 
             if (!isWalking)
             {
@@ -168,9 +112,10 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        moveDir = new Vector3(phoneX, phoneY).normalized;
-
-        if (phoneX < 0)
+        moveDir = new Vector3(x, y).normalized;
+        // Don't flip the scale of the object, it's gonna mess up the UI, use "SpriteRenderer.Flip" instead.
+        // Vector3 player = transform.localScale;
+        if (Input.GetAxis("Horizontal") < 0)
         {
             spriteRenderer.flipX = true;
             if (moveDir.y == 0)
@@ -178,7 +123,7 @@ public class PlayerControl : MonoBehaviour
                 minimapIndicator.eulerAngles = new Vector3(0, 0, -90);
             }
         }
-        if (phoneX > 0)
+        if (Input.GetAxis("Horizontal") > 0)
         {
             spriteRenderer.flipX = false;
             if (moveDir.y == 0)
@@ -186,19 +131,74 @@ public class PlayerControl : MonoBehaviour
                 minimapIndicator.eulerAngles = new Vector3(0, 0, 90);
             }
         }
-        if (phoneY < 0)
+        if (Input.GetAxis("Vertical") < 0)
         {
             minimapIndicator.eulerAngles = new Vector3(0, 0, 0);
         }
-        if (phoneY > 0)
+        if (Input.GetAxis("Vertical") > 0)
         {
             minimapIndicator.eulerAngles = new Vector3(0, 0, 180);
         }
+        //transform.localScale = player;
 
-        if (isInteractable != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            poi.SetActive(true);
+            Interact();
         }
+
+        ////Controls for phone.
+        //if (phoneX != 0 || phoneY != 0)
+        //{
+        //    anim.SetFloat("X", phoneX);
+        //    anim.SetFloat("Y", phoneY);
+
+        //    if (!isWalking)
+        //    {
+        //        isWalking = true;
+        //        anim.SetBool("IsMoving", isWalking);
+        //    }
+        //}
+        //else
+        //{
+        //    if (isWalking)
+        //    {
+        //        isWalking = false;
+        //        anim.SetBool("IsMoving", isWalking);
+        //        StopMoving();
+        //    }
+        //}
+
+        //moveDir = new Vector3(phoneX, phoneY).normalized;
+
+        //if (phoneX < 0)
+        //{
+        //    spriteRenderer.flipX = true;
+        //    if (moveDir.y == 0)
+        //    {
+        //        minimapIndicator.eulerAngles = new Vector3(0, 0, -90);
+        //    }
+        //}
+        //if (phoneX > 0)
+        //{
+        //    spriteRenderer.flipX = false;
+        //    if (moveDir.y == 0)
+        //    {
+        //        minimapIndicator.eulerAngles = new Vector3(0, 0, 90);
+        //    }
+        //}
+        //if (phoneY < 0)
+        //{
+        //    minimapIndicator.eulerAngles = new Vector3(0, 0, 0);
+        //}
+        //if (phoneY > 0)
+        //{
+        //    minimapIndicator.eulerAngles = new Vector3(0, 0, 180);
+        //}
+
+        //if (isInteractable != null)
+        //{
+        //    poi.SetActive(true);
+        //}
     }
 
     public void ButtonUpTop()

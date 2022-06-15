@@ -216,6 +216,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1636,6 +1637,71 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tilemap_test_56: -7205662803607118832
+      tilemap_test_37: -4558390884195601326
+      tilemap_test_34: -915697826141310406
+      tilemap_test_36: 7838140078488222647
+      tilemap_test_17: -1886867046303868397
+      tilemap_test_26: -7165338268124558027
+      tilemap_test_45: 4731769039256801272
+      tilemap_test_52: 3095784736843263128
+      tilemap_test_62: -9195465387807822436
+      tilemap_test_0: -597304623020510318
+      tilemap_test_5: 589926368804116087
+      tilemap_test_9: 8862700609856186921
+      tilemap_test_21: -8110560359811328169
+      tilemap_test_4: 6283397844340635538
+      tilemap_test_15: 71095177366418160
+      tilemap_test_3: 6779031463662109479
+      tilemap_test_7: 1423394304046959874
+      tilemap_test_57: 438360748423791483
+      tilemap_test_19: 5912715226102779652
+      tilemap_test_41: -6245268048838380900
+      tilemap_test_59: 1109096571599838629
+      tilemap_test_30: 2152721199578781476
+      tilemap_test_13: 1364272588903487014
+      tilemap_test_28: -2520846924363592517
+      tilemap_test_46: 5904203615307182900
+      tilemap_test_6: 6102424553015607557
+      tilemap_test_31: 5170228745823976054
+      tilemap_test_2: 3997705278040858071
+      tilemap_test_43: -3463016199098201740
+      tilemap_test_49: -8622130647208534470
+      tilemap_test_40: 8755010613189766837
+      tilemap_test_61: -7345313272948510166
+      tilemap_test_53: -2802650017247904168
+      tilemap_test_14: -653564205077307967
+      tilemap_test_1: 6415284787223886713
+      tilemap_test_24: 7880162343558440732
+      tilemap_test_48: -6227558689673488642
+      tilemap_test_55: 2784081350198817868
+      tilemap_test_32: -2329649875546140498
+      tilemap_test_63: 3330644938203339541
+      tilemap_test_25: 5407314783206706197
+      tilemap_test_42: 2616977446364449941
+      tilemap_test_12: 1312058395055450663
+      tilemap_test_22: -8421000674992839249
+      tilemap_test_20: -285135721880884879
+      tilemap_test_10: -5823777617528561740
+      tilemap_test_11: 3760676498033075345
+      tilemap_test_33: 3809511922829214522
+      tilemap_test_35: -94607572526308308
+      tilemap_test_50: 7497397368968217289
+      tilemap_test_39: 3893370300846440703
+      tilemap_test_29: -4516186074833240794
+      tilemap_test_51: 5211265542223602900
+      tilemap_test_60: -612422725037038367
+      tilemap_test_16: -4549775724658872222
+      tilemap_test_38: -8646585806867958091
+      tilemap_test_8: -274054425601552230
+      tilemap_test_27: -3010185832667663737
+      tilemap_test_18: 1389629189203489710
+      tilemap_test_23: -7009122654728129570
+      tilemap_test_47: 5641346612750181070
+      tilemap_test_44: 3519028488342437220
+      tilemap_test_54: -4578077996172304371
+      tilemap_test_58: 5064974685207027987
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

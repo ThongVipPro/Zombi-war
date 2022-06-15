@@ -36,6 +36,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -196,6 +197,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      NES_Zombie_Attack_West_strip4_3: 5395076530497622159
+      NES_Zombie_Attack_West_strip4_1: -6695463533422904215
+      NES_Zombie_Attack_West_strip4_2: -4660978333858237712
+      NES_Zombie_Attack_West_strip4_0: -2407296032053901023
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

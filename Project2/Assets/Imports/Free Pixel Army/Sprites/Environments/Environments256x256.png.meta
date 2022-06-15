@@ -168,6 +168,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1162,6 +1163,49 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Enviropments256x256_33: -3063205955097872921
+      Enviropments256x256_18: 6749188779819792867
+      Enviropments256x256_47: 1548026724137119753
+      Enviropments256x256_40: -2387126835634949471
+      Enviropments256x256_44: -1135532095174762070
+      Enviropments256x256_35: -5723673250886115175
+      Enviropments256x256_1: 4959174773169357245
+      Enviropments256x256_43: -707383773279195215
+      Enviropments256x256_16: -2070736440519888141
+      Enviropments256x256_28: -8257098767186332627
+      Enviropments256x256_46: 8105080715348733896
+      Enviropments256x256_2: -6248267904576781136
+      Enviropments256x256_19: -14273303770280113
+      Enviropments256x256_10: 8762983475359663822
+      Enviropments256x256_45: -434879369836922269
+      Enviropments256x256_24: 5832729149634385945
+      Enviropments256x256_11: 7133148801755345368
+      Enviropments256x256_7: -5638423488273349820
+      Enviropments256x256_23: 6764608079172969245
+      Enviropments256x256_34: -1276848027817976068
+      Enviropments256x256_5: -3740014989109651328
+      Enviropments256x256_39: -6736588211099709609
+      Enviropments256x256_17: -705523638365406957
+      Enviropments256x256_29: -7696103372794864643
+      Enviropments256x256_30: 1337063725808123163
+      Enviropments256x256_36: 992386811426212049
+      Enviropments256x256_32: 5497235227612598131
+      Enviropments256x256_37: -2140125391164712252
+      Enviropments256x256_31: -6977482537279403694
+      Enviropments256x256_12: -1805137855926330490
+      Enviropments256x256_3: 736404819194649177
+      Enviropments256x256_8: -8897572754296505850
+      Enviropments256x256_38: -182733230878455543
+      Enviropments256x256_0: -1213441921237540573
+      Enviropments256x256_27: -6734390010248557146
+      Enviropments256x256_42: -8429862159876228641
+      Enviropments256x256_25: 7205090655701859392
+      Enviropments256x256_26: -7390316542196217281
+      Enviropments256x256_6: 8727458577142676208
+      Enviropments256x256_9: 2498635826097825257
+      Enviropments256x256_4: 2512126733496742455
+      Enviropments256x256_41: -1720165868902098316
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

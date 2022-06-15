@@ -39,6 +39,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -256,6 +257,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      BoredHelmetAnim_0: 5959245894377671268
+      BoredHelmetAnim_2: -8413811252070700473
+      BoredHelmetAnim_1: -4820478939686088993
+      BoredHelmetAnim_4: 6723500584860299761
+      BoredHelmetAnim_3: -6186841213084988680
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

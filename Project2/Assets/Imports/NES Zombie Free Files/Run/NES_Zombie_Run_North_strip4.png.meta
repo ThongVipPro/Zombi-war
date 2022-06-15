@@ -36,6 +36,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -196,6 +197,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      NES_Zombie_Run_North_strip4_0: -6043668635320007923
+      NES_Zombie_Run_North_strip4_1: -4871663832338179689
+      NES_Zombie_Run_North_strip4_3: -9203840196876153216
+      NES_Zombie_Run_North_strip4_2: -7267437623984480027
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

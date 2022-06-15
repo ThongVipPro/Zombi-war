@@ -36,6 +36,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -196,6 +197,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      NES_Zombie_Walk_2_North_strip4_3: 8843047985458509740
+      NES_Zombie_Walk_2_North_strip4_1: 4847364586745514672
+      NES_Zombie_Walk_2_North_strip4_0: 3232240018218654378
+      NES_Zombie_Walk_2_North_strip4_2: -6707429208496496195
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

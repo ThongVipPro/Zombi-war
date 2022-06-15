@@ -36,6 +36,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -196,6 +197,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      NES_Zombie_Death_South_strip4_3: -3372298626920246135
+      NES_Zombie_Death_South_strip4_0: 750667426414576598
+      NES_Zombie_Death_South_strip4_2: -1573184721231287570
+      NES_Zombie_Death_South_strip4_1: 8357634227080448339
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
